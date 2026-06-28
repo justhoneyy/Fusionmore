@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fusion Coaching - Premier Science & Commerce Coaching Institute. JEE, NEET, Foundation Courses. 5000+ Students, 95% Success Rate, 10+ Years of Excellence.">
+  <meta name="keywords" content="Fusion Coaching, Science Coaching, Commerce Coaching, JEE, NEET, Best Coaching Institute, Physics, Chemistry, Mathematics">
+  <meta name="author" content="Fusion Coaching">
+  <meta property="og:title" content="Fusion Coaching - Building the Future of Science Education">
+  <meta property="og:description" content="Premier Science & Commerce Coaching Institute with 5000+ Students and 95% Success Rate.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fusioncoaching.in">
+  <meta name="theme-color" content="#1a56db">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸŽ¯</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/static/dashboard.css">
+  <title>Fusion Coaching | Premier Science & Commerce Institute</title>
+  <style>
+    :root {
+      --primary: #1a56db; --primary-dark: #0f3a8a; --primary-light: #3b82f6;
+      --primary-gradient: linear-gradient(135deg, #1a56db 0%, #3b82f6 100%);
+      --secondary: #0ea5e9; --accent: #06b6d4; --gold: #f59e0b; --success: #10b981; --danger: #ef4444;
+      --bg: #ffffff; --bg-alt: #f8fafc; --bg-card: #ffffff;
+      --bg-glass: rgba(255,255,255,0.8);
+      --text: #0f172a; --text-secondary: #475569; --text-light: #94a3b8; --border: #e2e8f0;
+      --shadow: 0 4px 20px rgba(0,0,0,0.06); --shadow-lg: 0 10px 40px rgba(0,0,0,0.1);
+      --radius: 12px; --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1); --transition-slow: 0.6s cubic-bezier(0.4,0,0.2,1);
+      --font: 'Inter', sans-serif; --font-heading: 'Poppins', 'Inter', sans-serif;
+      --max-width: 1200px; --header-height: 72px;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1120; --bg-alt: #111827; --bg-card: #1e293b;
+      --bg-glass: rgba(30,41,59,0.8);
+      --text: #f1f5f9; --text-secondary: #94a3b8; --text-light: #64748b; --border: #1e293b;
+      --shadow: 0 4px 20px rgba(0,0,0,0.4); --shadow-lg: 0 10px 40px rgba(0,0,0,0.5);
+      --primary: #3b82f6; --primary-dark: #1d4ed8; --primary-light: #60a5fa;
+      --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;transition:background var(--transition-slow),color var(--transition-slow)}
+    a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block}
+    button{cursor:pointer;font-family:inherit;border:none;background:none}
+    input,textarea,select{font-family:inherit}
+    ::selection{background:var(--primary);color:#fff}
+    :focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+    ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-alt)}::-webkit-scrollbar-thumb{background:var(--text-light);border-radius:4px}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 24px}
+    .section{padding:100px 0}
+    .section-title{text-align:center;margin-bottom:60px}
+    .section-title h2{font-family:var(--font-heading);font-size:clamp(28px,4vw,44px);font-weight:700;margin-bottom:16px;position:relative;display:inline-block}
+    .section-title h2::after{content:'';display:block;width:60px;height:4px;background:var(--primary-gradient);border-radius:2px;margin:12px auto 0}
+    .section-title p{color:var(--text-secondary);font-size:clamp(15px,1.2vw,18px);max-width:600px;margin:0 auto}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 32px;border-radius:50px;font-weight:600;font-size:15px;transition:all var(--transition);position:relative;overflow:hidden;white-space:nowrap}
+    .btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-100%);transition:transform 0.4s}
+    .btn:hover::after{transform:translateX(0)}
+    .btn-primary{background:var(--primary-gradient);color:#fff;box-shadow:0 4px 15px rgba(26,86,219,0.35)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,86,219,0.45)}
+    .btn-outline{border:2px solid var(--primary);color:var(--primary);background:transparent}
+    .btn-outline:hover{background:var(--primary);color:#fff;transform:translateY(-2px)}
+    .btn-sm{padding:8px 16px;font-size:13px}
+    .btn-danger{background:var(--danger);color:#fff}
+    .btn-danger:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(239,68,68,0.35)}
+    #loader{position:fixed;top:0;left:0;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg);z-index:10000;transition:opacity 0.4s ease,visibility 0.4s ease}
+    #loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .loader-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:320px;text-align:center;margin:auto}
+    .loader-logo{font-family:var(--font-heading);font-size:36px;font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .loader-bar{width:200px;height:3px;background:var(--border);border-radius:2px;margin:20px auto 0;overflow:hidden}
+    .loader-bar-fill{height:100%;width:0;background:var(--primary-gradient);border-radius:2px;animation:loadFill 1.8s ease-in-out forwards}
+    @keyframes loadFill{0%{width:0}100%{width:100%}}
+    .navbar{position:sticky;top:0;z-index:1000;background:var(--bg-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:background var(--transition-slow),border-color var(--transition-slow);height:var(--header-height)}
+    .navbar.scrolled{box-shadow:0 2px 30px rgba(0,0,0,0.08)}
+    [data-theme="dark"] .navbar.scrolled{box-shadow:0 2px 30px rgba(0,0,0,0.3)}
+    .navbar .container{display:flex;align-items:center;justify-content:space-between;height:100%}
+    .nav-logo{font-family:var(--font-heading);font-size:24px;font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:flex;align-items:center;gap:8px;animation:logoGlow 3s ease-in-out infinite}
+    @keyframes logoGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
+    .nav-logo span{font-weight:300;font-size:14px;-webkit-text-fill-color:var(--text-secondary);color:var(--text-secondary);background:none}
+    .nav-links{display:flex;align-items:center;gap:6px}
+    .nav-links a{padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;color:var(--text-secondary);transition:all var(--transition);position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:60%;height:2px;background:var(--primary);border-radius:1px;transition:transform var(--transition)}
+    .nav-links a:hover::after,.nav-links a.active::after{transform:translateX(-50%) scaleX(1)}
+    .nav-links a:hover,.nav-links a.active{color:var(--primary)}
+    .nav-links .btn{padding:10px 24px;font-size:14px;margin-left:8px}
+    .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;z-index:1001}
+    .nav-toggle span{display:block;width:26px;height:2px;background:var(--text);border-radius:2px;transition:all var(--transition)}
+    .nav-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .nav-toggle.active span:nth-child(2){opacity:0}
+    .nav-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .mobile-menu{position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--bg);z-index:999;padding:90px 24px 24px;box-shadow:var(--shadow-lg);transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;gap:10px}
+    .mobile-menu.open{transform:translateX(0)}
+    .mobile-menu a{display:block;padding:12px 16px;font-size:16px;font-weight:500;color:var(--text);border-radius:12px;transition:all var(--transition)}
+    .mobile-menu a:hover{background:var(--bg-alt);color:var(--primary)}
+    .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg);padding:120px 0 80px}
+    .hero::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(26,86,219,0.08) 0%,transparent 70%);border-radius:50%;animation:blobFloat 20s ease-in-out infinite;pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-10%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,0.06) 0%,transparent 70%);border-radius:50%;animation:blobFloat 25s ease-in-out infinite reverse;pointer-events:none}
+    @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-30px) scale(1.05)}66%{transform:translate(-20px,20px) scale(0.95)}}
+    .hero .container{display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center;position:relative;z-index:1}
+    .hero-content h1{font-family:var(--font-heading);font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.2;margin-bottom:20px}
+    .hero-content h1 .line1{display:block;animation:fadeInUp 1s ease-out both;color:var(--text)}
+    .hero-content h1 .line2{display:block;margin-top:5px;min-height:1.2em}
+    #changing-text{display:inline-block;color:var(--primary);font-weight:800;position:relative}
+    .typewriter-cursor{display:inline-block;width:3px;height:0.85em;background-color:var(--primary);margin-left:4px;vertical-align:middle;animation:cursorBlink 0.75s step-end infinite}
+    @keyframes cursorBlink{from,to{background-color:transparent}50%{background-color:var(--primary)}}
+    @keyframes fadeInUp{0%{opacity:0;transform:translateY(35px)}100%{opacity:1;transform:translateY(0)}}
+    .hero-content p{font-size:clamp(15px,1.2vw,18px);color:var(--text-secondary);max-width:560px;margin-bottom:36px;line-height:1.8;animation:fadeInUp 1s ease-out 0.4s both}
+    .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;animation:fadeInUp 1s ease-out 0.6s both}
+    .hero-contact-banner{display:flex;flex-wrap:wrap;gap:16px 24px;margin-top:40px;padding:18px 24px;background:var(--bg-glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);animation:fadeInUp 1s ease-out 0.8s both}
+    .hero-contact-banner .hcb-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);font-weight:500}
+    .hero-contact-banner .hcb-item i{width:36px;height:36px;border-radius:10px;background:var(--primary-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .hero-contact-banner .hcb-item span{color:var(--text-secondary);font-weight:400}
+    .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;animation:fadeInUp 1s ease-out 1s both}
+    .hero-stat{text-align:center;padding:16px 12px;background:var(--bg-glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);transition:all var(--transition)}
+    .hero-stat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .hero-stat .number{font-family:var(--font-heading);font-size:clamp(22px,2.5vw,32px);font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-stat .label{font-size:12px;color:var(--text-secondary);font-weight:500;margin-top:4px}
+    .hero-visual{display:flex;justify-content:center;align-items:center;position:relative;animation:fadeInRight 1.2s ease-out}
+    @keyframes fadeInRight{0%{opacity:0;transform:translateX(40px)}100%{opacity:1;transform:translateX(0)}}
+    .hero-illustration{width:100%;max-width:460px;aspect-ratio:1/0.9}
+    .hero-illustration svg{width:100%;height:100%}
+    .particles{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .particle{position:absolute;user-select:none;pointer-events:none;opacity:0.08;color:var(--primary);font-family:var(--font-heading);font-weight:600;animation:particleFloat linear infinite}
+    @keyframes particleFloat{0%{transform:translateY(105vh) rotate(0deg);opacity:0}10%{opacity:0.12}90%{opacity:0.12}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+    .courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+    .course-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;transition:all var(--transition);position:relative;overflow:hidden}
+    .course-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--primary-gradient);transform:scaleX(0);transform-origin:left;transition:transform var(--transition)}
+    .course-card:hover::before{transform:scaleX(1)}
+    .course-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--primary-light)}
+    .course-icon{width:52px;height:52px;border-radius:14px;background:rgba(26,86,219,0.06);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--primary);margin-bottom:18px;transition:all var(--transition)}
+    .course-card:hover .course-icon{background:var(--primary-gradient);color:#fff;transform:rotateY(180deg)}
+    .course-card h3{font-family:var(--font-heading);font-size:18px;font-weight:600;margin-bottom:8px}
+    .course-card p{color:var(--text-secondary);font-size:14px;line-height:1.7}
+    .course-tag{display:inline-block;padding:3px 12px;border-radius:20px;font-size:11px;font-weight:600;margin-top:14px}
+    .tag-science{background:rgba(26,86,219,0.08);color:var(--primary)}
+    .tag-commerce{background:rgba(245,158,11,0.08);color:var(--gold)}
+    .course-category-title{font-family:var(--font-heading);font-size:22px;font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+    .course-category-title i{color:var(--primary)}
+    .faculty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+    .faculty-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px 24px;text-align:center;transition:all var(--transition)}
+    .faculty-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .faculty-img{width:100px;height:100px;border-radius:50%;margin:0 auto 18px;background:var(--primary-gradient);display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;transition:transform var(--transition)}
+    .faculty-card:hover .faculty-img{transform:scale(1.08) rotate(4deg)}
+    .faculty-card h3{font-size:20px;font-weight:600;margin-bottom:4px}
+    .faculty-card .role{color:var(--primary);font-weight:600;font-size:14px;margin-bottom:14px}
+    .faculty-card .details{font-size:13px;color:var(--text-secondary);line-height:1.8;text-align:left;display:inline-block;margin:0 auto}
+    .faculty-card .details span{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
+    .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 20px;text-align:center;transition:all var(--transition);position:relative;overflow:hidden}
+    .feature-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--primary-gradient);transform:scaleX(0);transition:transform var(--transition)}
+    .feature-card:hover::after{transform:scaleX(1)}
+    .feature-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .feature-icon{width:56px;height:56px;border-radius:16px;background:rgba(26,86,219,0.06);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--primary);margin:0 auto 16px;transition:all var(--transition)}
+    .feature-card:hover .feature-icon{background:var(--primary-gradient);color:#fff;transform:scale(1.05) rotate(-5deg)}
+    .feature-card h3{font-size:17px;font-weight:600;margin-bottom:8px}
+    .feature-card p{font-size:13px;color:var(--text-secondary)}
+    .results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
+    .result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 20px;text-align:center;transition:all var(--transition)}
+    .result-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .result-card .rank{font-family:var(--font-heading);font-size:32px;font-weight:800;background:var(--primary-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .result-card .percent{display:inline-block;padding:4px 16px;border-radius:20px;background:rgba(16,185,129,0.08);color:var(--success);font-weight:700;font-size:13px;margin:8px 0 12px}
+    .result-card h4{font-size:18px;font-weight:600}
+    .result-card .detail{font-size:13px;color:var(--text-secondary);margin-top:4px}
+    .testimonials-carousel{position:relative;overflow:hidden;padding-bottom:10px}
+    .testimonials-track{display:flex;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1)}
+    .testimonial-slide{min-width:100%;padding:10px}
+    .testimonial-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 32px;max-width:700px;margin:0 auto;text-align:center}
+    .testimonial-stars{color:var(--gold);font-size:18px;margin-bottom:16px}
+    .testimonial-card blockquote{font-size:16px;color:var(--text-secondary);line-height:1.8;font-style:italic;margin-bottom:20px}
+    .testimonial-author{display:flex;align-items:center;justify-content:center;gap:14px}
+    .testimonial-avatar{width:50px;height:50px;border-radius:50%;background:var(--primary-gradient);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+    .testimonial-author-info h4{font-size:16px;font-weight:600}
+    .testimonial-author-info span{font-size:13px;color:var(--text-light)}
+    .carousel-controls{display:flex;justify-content:center;gap:12px;margin-top:24px}
+    .carousel-controls button{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text);display:flex;align-items:center;justify-content:center;transition:all var(--transition)}
+    .carousel-controls button:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
+    .carousel-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all var(--transition);cursor:pointer}
+    .carousel-dot.active{background:var(--primary);width:28px;border-radius:5px}
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+    .gallery-item{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;background:var(--bg-alt);cursor:pointer;transition:all var(--transition)}
+    .gallery-item:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
+    .gallery-item svg{width:100%;height:100%;transition:transform 0.6s}
+    .gallery-item:hover svg{transform:scale(1.05)}
+    .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6),transparent);display:flex;align-items:flex-end;padding:20px;opacity:0;transition:opacity var(--transition)}
+    .gallery-item:hover .gallery-overlay{opacity:1}
+    .gallery-overlay span{color:#fff;font-weight:500;font-size:14px}
+    .timeline{position:relative;max-width:800px;margin:0 auto;padding:20px 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:var(--border);transform:translateX(-50%)}
+    .timeline-item{display:flex;align-items:flex-start;margin-bottom:48px;position:relative}
+    .timeline-item:nth-child(odd){flex-direction:row-reverse}
+    .timeline-item .step-num{position:absolute;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:var(--primary-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;z-index:2;box-shadow:0 4px 15px rgba(26,86,219,0.33)}
+    .timeline-item:hover .step-num{transform:translateX(-50%) scale(1.1)}
+    .timeline-item .content{width:calc(50% - 40px);padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:all var(--transition)}
+    .timeline-item .content:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+    .timeline-item .content h3{font-size:18px;font-weight:600;margin-bottom:6px}
+    .timeline-item .content p{font-size:14px;color:var(--text-secondary)}
+    .faq-list{max-width:760px;margin:0 auto}
+    .faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;background:var(--bg-card);transition:all var(--transition)}
+    .faq-item.open{border-color:var(--primary);box-shadow:0 0 0 2px rgba(26,86,219,0.06)}
+    .faq-question{width:100%;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:500;color:var(--text);background:none;text-align:left;cursor:pointer}
+    .faq-question i{font-size:14px;color:var(--primary);transition:transform var(--transition)}
+    .faq-item.open .faq-question i{transform:rotate(180deg)}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1),padding 0.4s}
+    .faq-item.open .faq-answer{max-height:300px;padding:0 24px 20px}
+    .faq-answer p{font-size:14px;color:var(--text-secondary);line-height:1.8}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+    .contact-form{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px}
+    .contact-form h3{font-family:var(--font-heading);font-size:22px;font-weight:600;margin-bottom:24px}
+    .form-group{margin-bottom:18px}
+    .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text)}
+    .form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px;transition:border-color var(--transition),box-shadow var(--transition)}
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,86,219,0.1);outline:none}
+    .form-group textarea{resize:vertical;min-height:120px}
+    .form-group .error{color:var(--danger);font-size:12px;margin-top:4px;display:none}
+    .form-group.error input,.form-group.error textarea{border-color:var(--danger)}
+    .form-group.error .error{display:block}
+    .form-success{display:none;padding:16px;background:rgba(16,185,129,0.1);border:1px solid var(--success);border-radius:8px;color:var(--success);font-weight:500;font-size:14px;margin-top:16px}
+    .contact-info{display:flex;flex-direction:column;gap:20px}
+    .contact-info-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;align-items:flex-start;gap:16px;transition:all var(--transition)}
+    .contact-info-card:hover{box-shadow:var(--shadow);transform:translateX(4px)}
+    .contact-info-card i{width:44px;height:44px;border-radius:12px;background:rgba(26,86,219,0.06);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--primary);flex-shrink:0}
+    .contact-info-card h4{font-size:15px;font-weight:600;margin-bottom:4px}
+    .contact-info-card p{font-size:14px;color:var(--text-secondary)}
+    .contact-map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);height:220px;background:var(--bg-alt)}
+    .contact-map iframe{width:100%;height:100%;border:none}
+    .footer{background:var(--primary-dark);color:#fff;padding:60px 0 0;transition:background var(--transition-slow)}
+    [data-theme="dark"] .footer{background:#081022}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:40px;margin-bottom:40px}
+    .footer-brand h2{font-family:var(--font-heading);font-size:28px;font-weight:800;margin-bottom:16px}
+    .footer-brand p{font-size:14px;opacity:0.8;line-height:1.8;max-width:320px}
+    .footer h3{font-size:18px;font-weight:600;margin-bottom:20px;position:relative;padding-bottom:12px}
+    .footer h3::after{content:'';position:absolute;bottom:0;left:0;width:30px;height:3px;background:var(--primary-light);border-radius:2px}
+    .footer-links a{display:block;padding:6px 0;font-size:14px;opacity:0.75;transition:all var(--transition)}
+    .footer-links a:hover{opacity:1;padding-left:8px}
+    .footer-contact p{display:flex;align-items:center;gap:10px;font-size:14px;opacity:0.8;margin-bottom:12px}
+    .footer-contact p i{width:16px}
+    .footer-social{display:flex;gap:12px;margin-top:20px}
+    .footer-social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all var(--transition)}
+    .footer-social a:hover{background:var(--primary);transform:translateY(-3px)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;opacity:0.7}
+    .scroll-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;border-radius:50%;background:var(--primary-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 15px rgba(26,86,219,0.35);z-index:999;opacity:0;visibility:hidden;transform:translateY(20px);transition:all var(--transition)}
+    .scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+    .scroll-top:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(26,86,219,0.45)}
+    .ripple{position:relative;overflow:hidden}
+    .ripple-effect{position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);transform:scale(0);animation:rippleAnim 0.6s linear;pointer-events:none}
+    @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.8s,transform 0.8s}
+    .reveal-left.visible{opacity:1;transform:translateX(0)}
+    .reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.8s,transform 0.8s}
+    .reveal-right.visible{opacity:1;transform:translateX(0)}
+    @media(max-width:1024px){
+      .hero .container{grid-template-columns:1fr;gap:40px;text-align:center}
+      .hero-content p{margin-left:auto;margin-right:auto}
+      .hero-buttons{justify-content:center}
+      .hero-contact-banner{justify-content:center}
+      .hero-visual{display:none}
+      .hero-stats{grid-template-columns:repeat(4,1fr)}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .nav-toggle{display:flex}
+      .section{padding:60px 0}
+      .hero{padding:100px 0 40px;min-height:auto}
+      .hero-stats{grid-template-columns:repeat(2,1fr);gap:12px}
+      .hero-stat{padding:14px 8px}
+      .hero-contact-banner{flex-direction:column;gap:12px;padding:16px 20px;align-items:flex-start}
+      .courses-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+      .faculty-grid,.features-grid,.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;text-align:center}
+      .contact-form{padding:28px 20px}
+      .testimonial-card{padding:28px 20px}
+      .timeline::before{left:16px}
+      .timeline-item,.timeline-item:nth-child(odd){flex-direction:row}
+      .timeline-item .step-num{left:16px;transform:translateX(-50%)}
+      .timeline-item:hover .step-num{transform:translateX(-50%) scale(1.1)}
+      .timeline-item .content{width:calc(100% - 48px);margin-left:36px}
+      .loader-content{max-width:260px}
+      .loader-logo{font-size:28px}
+      .loader-bar{width:170px;margin:18px auto 0}
+    }
+    @media(max-width:480px){
+      .container{padding:0 16px}
+      .courses-grid,.faculty-grid,.features-grid,.gallery-grid{grid-template-columns:1fr}
+      .hero-buttons .btn{width:100%}
+      .hero-stats{grid-template-columns:1fr;gap:10px}
+      .hero-contact-banner{align-items:center}
+      .section-title h2{font-size:24px}
+      .loader-logo{font-size:24px}
+      .loader-bar{width:140px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
+      html{scroll-behavior:auto}
+    }
+    .skip-link{position:absolute;top:-100%;left:16px;padding:12px 20px;background:var(--primary);color:#fff;border-radius:0 0 8px 8px;z-index:10001;font-weight:600}
+    .skip-link:focus{top:0}
+    body,.navbar,.footer,.mobile-menu,.course-card,.faculty-card,.feature-card,.result-card,.testimonial-card,.contact-form,.contact-info-card,.faq-item,.timeline-item .content,.hero-stat,.hero-contact-banner{transition:background-color var(--transition-slow),color var(--transition-slow),border-color var(--transition-slow),box-shadow var(--transition-slow)}
+  </style>
+</head>
+<body>
+  <a href="#home" class="skip-link">Skip to main content</a>
+  <div id="loader" role="status" aria-label="Loading">
+    <div class="loader-content">
+      <div class="loader-logo">Fusion Coaching</div>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+  </div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="#home" class="nav-logo">Fusion <span>Coaching</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a><a href="#about">About</a><a href="#courses">Courses</a><a href="#faculty">Faculty</a><a href="#results">Results</a><a href="#testimonials">Testimonials</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+        <button class="btn btn-primary ripple" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+        <button class="btn btn-outline ripple" onclick="showLogin('student')" style="padding:10px 20px;font-size:13px"><i class="fas fa-user"></i> Login</button>
+        <button class="theme-toggle-topbar" id="themeToggleTopbar" aria-label="Toggle dark mode" style="background:none;border:none;color:var(--text-secondary);font-size:18px;padding:8px;cursor:pointer;border-radius:8px;transition:all var(--transition)"><i class="fas fa-moon" id="themeIconTopbar"></i></button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#home" onclick="closeMobileMenu()">Home</a><a href="#about" onclick="closeMobileMenu()">About</a><a href="#courses" onclick="closeMobileMenu()">Courses</a><a href="#faculty" onclick="closeMobileMenu()">Faculty</a><a href="#results" onclick="closeMobileMenu()">Results</a><a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a><a href="#gallery" onclick="closeMobileMenu()">Gallery</a><a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <div style="display:flex;gap:12px;margin-top:16px;align-items:center;padding:0 16px;">
+      <button class="btn btn-primary ripple" style="flex:1;" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'});closeMobileMenu();"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+      <button class="btn btn-outline ripple" onclick="showLogin('student');closeMobileMenu();" style="flex:1;"><i class="fas fa-user"></i> Login</button>
+    </div>
+  </div>
+  <!-- ===== MAIN CONTENT (Original Website Fully Preserved) ===== -->
+  <main id="mainWebsite">
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h1>
+            <span class="line1">Building the Future of</span>
+            <span class="line2"><span id="changing-text">Science Education</span><span class="typewriter-cursor"></span></span>
+          </h1>
+          <p>Fusion Coaching is dedicated to shaping bright minds through exceptional science and commerce education. With expert faculty, proven results, and a student-first approach, we prepare you for JEE, NEET, board exams, and beyond.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary ripple" onclick="document.getElementById('admission').scrollIntoView({behavior:'smooth'})">Enroll Now <i class="fas fa-arrow-right"></i></button>
+            <button class="btn btn-outline ripple" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Explore Courses <i class="fas fa-book-open"></i></button>
+          </div>
+          <div class="hero-contact-banner">
+            <div class="hcb-item"><i class="fas fa-phone-alt"></i> +91 87005 17172 <span>| Call Now</span></div>
+            <div class="hcb-item"><i class="fas fa-map-marker-alt"></i> E2/005 Bharat City, Near Teela Mod</div>
+            <div class="hcb-item"><i class="far fa-clock"></i> Mon-Sat: 6AM - 8PM</div>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="5000">0</span>+</div><div class="label">Students</div></div>
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="95">0</span>%</div><div class="label">Success Rate</div></div>
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="10">0</span>+</div><div class="label">Years of Excellence</div></div>
+            <div class="hero-stat"><div class="number"><span class="counter" data-target="1000">0</span>+</div><div class="label">Selections</div></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-illustration">
+            <svg viewBox="0 0 500 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a56db"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.2"/><stop offset="100%" stop-color="#1a56db" stop-opacity="0.05"/></linearGradient></defs>
+              <circle cx="250" cy="230" r="180" fill="url(#g2)"/><circle cx="250" cy="230" r="120" fill="url(#g2)"/>
+              <rect x="150" y="140" width="200" height="160" rx="12" fill="url(#g1)" opacity="0.1"/>
+              <rect x="165" y="160" width="170" height="8" rx="4" fill="url(#g1)" opacity="0.3"/>
+              <rect x="165" y="180" width="140" height="8" rx="4" fill="url(#g1)" opacity="0.2"/>
+              <rect x="165" y="200" width="155" height="8" rx="4" fill="url(#g1)" opacity="0.2"/>
+              <rect x="165" y="220" width="120" height="8" rx="4" fill="url(#g1)" opacity="0.15"/>
+              <polygon points="250,120 180,160 250,150 320,160" fill="url(#g1)" opacity="0.8"/>
+              <rect x="240" y="140" width="20" height="30" rx="3" fill="url(#g1)" opacity="0.6"/>
+              <circle cx="250" cy="130" r="6" fill="#f59e0b"/>
+              <ellipse cx="380" cy="130" rx="50" ry="16" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.3"/>
+              <ellipse cx="380" cy="130" rx="50" ry="16" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.3" transform="rotate(60,380,130)"/>
+              <ellipse cx="380" cy="130" rx="50" ry="16" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.3" transform="rotate(-60,380,130)"/>
+              <circle cx="380" cy="130" r="4" fill="url(#g1)" opacity="0.6"/>
+              <circle cx="120" cy="300" r="20" fill="url(#g1)" opacity="0.08"/>
+              <circle cx="400" cy="320" r="30" fill="url(#g1)" opacity="0.06"/>
+              <rect x="130" y="330" width="240" height="3" rx="1.5" fill="url(#g1)" opacity="0.1"/>
+              <text x="310" y="270" font-family="serif" font-size="36" font-style="italic" fill="url(#g1)" opacity="0.15">Ï€</text>
+              <text x="180" y="270" font-family="sans-serif" font-size="14" font-weight="600" fill="url(#g1)" opacity="0.2">E=mcÂ²</text>
+              <rect x="390" y="210" width="60" height="80" rx="6" fill="url(#g1)" opacity="0.1"/>
+              <rect x="395" y="250" width="12" height="35" rx="2" fill="url(#g1)" opacity="0.3"/>
+              <rect x="412" y="235" width="12" height="50" rx="2" fill="url(#g1)" opacity="0.2"/>
+              <rect x="429" y="245" width="12" height="40" rx="2" fill="url(#g1)" opacity="0.25"/>
+              <circle cx="140" cy="180" r="12" fill="url(#g1)" opacity="0.12"/>
+              <rect x="130" y="192" width="20" height="30" rx="4" fill="url(#g1)" opacity="0.08"/>
+              <circle cx="370" cy="180" r="12" fill="url(#g1)" opacity="0.12"/>
+              <rect x="360" y="192" width="20" height="30" rx="4" fill="url(#g1)" opacity="0.08"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT (Preserved) -->
+    <section class="section" id="about" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal"><h2>About Fusion Coaching</h2><p>Shaping futures through academic excellence since 2016</p></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+          <div class="reveal-left">
+            <div style="border-radius:var(--radius-lg);overflow:hidden;background:var(--primary-gradient);padding:4px;">
+              <div style="border-radius:calc(var(--radius-lg) - 4px);overflow:hidden;background:var(--bg);padding:30px;">
+                <svg viewBox="0 0 500 350" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;"><defs><linearGradient id="a1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a56db"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs><rect x="40" y="60" width="200" height="220" rx="16" fill="url(#a1)" opacity="0.08"/><rect x="260" y="60" width="200" height="220" rx="16" fill="url(#a1)" opacity="0.06"/><rect x="100" y="100" width="80" height="140" rx="6" fill="url(#a1)" opacity="0.15"/><rect x="110" y="110" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/><rect x="150" y="110" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/><rect x="110" y="145" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/><rect x="150" y="145" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/><rect x="110" y="180" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/><rect x="150" y="180" width="20" height="20" rx="3" fill="url(#a1)" opacity="0.2"/><rect x="125" y="215" width="30" height="25" rx="4" fill="url(#a1)" opacity="0.3"/><text x="140" y="270" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="600" fill="url(#a1)" opacity="0.4">Fusion</text><circle cx="320" cy="140" r="18" fill="url(#a1)" opacity="0.12"/><rect x="304" y="158" width="32" height="40" rx="6" fill="url(#a1)" opacity="0.08"/><circle cx="370" cy="140" r="18" fill="url(#a1)" opacity="0.12"/><rect x="354" y="158" width="32" height="40" rx="6" fill="url(#a1)" opacity="0.08"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-right">
+            <h3 style="font-family:var(--font-heading);font-size:24px;font-weight:700;margin-bottom:16px;">Premier Science & Commerce Institute</h3>
+            <p style="color:var(--text-secondary);margin-bottom:16px;line-height:1.8;">Fusion Coaching has been a beacon of academic excellence since 2016, empowering thousands of students to achieve their dreams. Our holistic approach combines expert faculty, personalized attention, and a proven curriculum.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Expert Faculty</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Small Batches</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Digital Study Material</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Weekly Tests</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Doubt Sessions</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);"><i class="fas fa-check-circle" style="color:var(--success);"></i> Career Guidance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSES (Preserved) -->
+    <section class="section" id="courses">
+      <div class="container">
+        <div class="section-title reveal"><h2>Our Courses</h2><p>Comprehensive programs designed for academic excellence</p></div>
+        <div class="reveal" style="margin-bottom:40px;">
+          <div class="course-category-title"><i class="fas fa-flask"></i> Science Courses</div>
+          <div class="courses-grid">
+            <div class="course-card"><div class="course-icon"><i class="fas fa-atom"></i></div><h3>Class 9 Science Foundation</h3><p>Build a strong foundation in Physics, Chemistry, and Mathematics.</p><span class="course-tag tag-science">Foundation</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-microscope"></i></div><h3>Class 10 Science</h3><p>Excel in board exams with comprehensive Science and Math coverage.</p><span class="course-tag tag-science">Board Focus</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-square-root-alt"></i></div><h3>Class 11 PCM</h3><p>Master Physics, Chemistry, and Mathematics for JEE preparation.</p><span class="course-tag tag-science">PCM</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-rocket"></i></div><h3>Class 12 PCM</h3><p>Advanced preparation for board exams and competitive tests.</p><span class="course-tag tag-science">PCM</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-bolt"></i></div><h3>Physics</h3><p>In-depth physics from fundamentals to advanced problem-solving.</p><span class="course-tag tag-science">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-flask"></i></div><h3>Chemistry</h3><p>Comprehensive chemistry covering physical, organic, and inorganic.</p><span class="course-tag tag-science">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-calculator"></i></div><h3>Mathematics</h3><p>Build mathematical excellence with rigorous practice.</p><span class="course-tag tag-science">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-trophy"></i></div><h3>JEE Foundation</h3><p>Targeted preparation for JEE Main & Advanced.</p><span class="course-tag tag-science">Competitive</span></div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="course-category-title"><i class="fas fa-chart-line"></i> Commerce Courses</div>
+          <div class="courses-grid">
+            <div class="course-card"><div class="course-icon"><i class="fas fa-briefcase"></i></div><h3>Class 11 Commerce</h3><p>Build your foundation in Accounts, Economics, and Business Studies.</p><span class="course-tag tag-commerce">Commerce</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-chart-bar"></i></div><h3>Class 12 Commerce</h3><p>Excel in board exams with comprehensive commerce curriculum.</p><span class="course-tag tag-commerce">Commerce</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-book"></i></div><h3>Accounts</h3><p>Master financial accounting principles with practical problem-solving.</p><span class="course-tag tag-commerce">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-globe"></i></div><h3>Economics</h3><p>Understand micro and macro economics through real-world applications.</p><span class="course-tag tag-commerce">Subject</span></div>
+            <div class="course-card"><div class="course-icon"><i class="fas fa-handshake"></i></div><h3>Business Studies</h3><p>Learn business principles, management, and organizational strategies.</p><span class="course-tag tag-commerce">Subject</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FACULTY (Preserved) -->
+    <section class="section" id="faculty" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal"><h2>Our Expert Faculty</h2><p>Learn from the brightest minds in education</p></div>
+        <div class="faculty-grid">
+          <div class="faculty-card reveal"><div class="faculty-img"><i class="fas fa-user-tie"></i></div><h3>Aakash Sir</h3><div class="role">Senior Physics Faculty</div><div class="details"><span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Sc. Physics, IIT Delhi</span><span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 12+ Years Experience</span><span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Mechanics</span></div></div>
+          <div class="faculty-card reveal"><div class="faculty-img"><i class="fas fa-user-graduate"></i></div><h3>Pradeep Sir</h3><div class="role">Senior Mathematics Faculty</div><div class="details"><span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Sc. Mathematics, IIT BHU</span><span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 10+ Years Experience</span><span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Calculus & Algebra</span></div></div>
+          <div class="faculty-card reveal"><div class="faculty-img" style="background:linear-gradient(135deg,#0ea5e9,#1a56db);"><i class="fas fa-flask"></i></div><h3>Chemistry Faculty</h3><div class="role">Senior Chemistry Faculty</div><div class="details"><span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Sc. Chemistry, DU</span><span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 8+ Years Experience</span><span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Organic</span></div></div>
+          <div class="faculty-card reveal"><div class="faculty-img" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-chart-pie"></i></div><h3>Commerce Faculty</h3><div class="role">Senior Commerce Faculty</div><div class="details"><span><i class="fas fa-graduation-cap" style="width:16px;color:var(--primary);"></i> M.Com, CA (Inter)</span><span><i class="fas fa-briefcase" style="width:16px;color:var(--primary);"></i> 9+ Years Experience</span><span><i class="fas fa-star" style="width:16px;color:var(--gold);"></i> Specialization: Accounts & Economics</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE (Preserved) -->
+    <section class="section" id="why-choose">
+      <div class="container">
+        <div class="section-title reveal"><h2>Why Choose Fusion Coaching?</h2><p>What makes us the preferred choice for students and parents</p></div>
+        <div class="features-grid">
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div><h3>Experienced Teachers</h3><p>Highly qualified faculty with years of teaching expertise.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-users"></i></div><h3>Small Batch Size</h3><p>Personalized attention with limited students per batch.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-question-circle"></i></div><h3>Daily Doubt Sessions</h3><p>Dedicated doubt-clearing sessions every single day.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-calendar-check"></i></div><h3>Weekly Tests</h3><p>Regular assessments to track and improve performance.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h3>Digital Study Material</h3><p>Access to premium digital notes and practice resources.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-file-alt"></i></div><h3>Parent Progress Reports</h3><p>Detailed monthly performance reports for parents.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-projector"></i></div><h3>Smart Classrooms</h3><p>Modern smart classrooms with advanced teaching aids.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-rupee-sign"></i></div><h3>Affordable Fees</h3><p>Quality education at accessible and competitive fees.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-compass"></i></div><h3>Career Guidance</h3><p>Expert career counseling for future academic paths.</p></div>
+          <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-heart"></i></div><h3>Individual Attention</h3><p>Every student receives personal mentoring and support.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS (Preserved) -->
+    <section class="section" id="results" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal"><h2>Our Results Speak</h2><p>Celebrating the success stories of our bright stars</p></div>
+        <div class="results-grid">
+          <div class="result-card reveal"><div class="rank">AIR 42</div><div class="percent">99.8%</div><h4>Rahul Sharma</h4><div class="detail">JEE Advanced 2024</div></div>
+          <div class="result-card reveal"><div class="rank">AIR 156</div><div class="percent">99.4%</div><h4>Priya Patel</h4><div class="detail">JEE Advanced 2024</div></div>
+          <div class="result-card reveal"><div class="rank">99.6%</div><div class="percent">School Topper</div><h4>Amit Verma</h4><div class="detail">Class 12 CBSE 2024</div></div>
+          <div class="result-card reveal"><div class="rank">99.2%</div><div class="percent">School Topper</div><h4>Sneha Gupta</h4><div class="detail">Class 12 CBSE 2024</div></div>
+        </div>
+        <div style="text-align:center;margin-top:40px;" class="reveal"><p style="color:var(--text-secondary);font-size:16px;"><i class="fas fa-trophy" style="color:var(--gold);"></i> 1000+ students have secured admission to India's top colleges and universities.</p></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS (Preserved) -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-title reveal"><h2>What Our Students Say</h2><p>Hear from our students and their parents</p></div>
+        <div class="testimonials-carousel reveal">
+          <div class="testimonials-track" id="testimonialTrack">
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><blockquote>"Fusion Coaching transformed my approach to Physics and Mathematics. The faculty's dedication is unmatched. I went from struggling in Class 11 to securing AIR 156 in JEE Advanced. Forever grateful!"</blockquote><div class="testimonial-author"><div class="testimonial-avatar">RP</div><div class="testimonial-author-info"><h4>Rahul Patel</h4><span>JEE Advanced 2024 Â· AIR 156</span></div></div></div></div>
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><blockquote>"The small batch sizes and individual attention at Fusion made all the difference. Every doubt was addressed patiently. I scored 99.4% in my Class 12 boards. Highly recommended!"</blockquote><div class="testimonial-author"><div class="testimonial-avatar">SK</div><div class="testimonial-author-info"><h4>Sneha Kapoor</h4><span>Class 12 CBSE 2024 Â· 99.4%</span></div></div></div></div>
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><blockquote>"As a parent, I was constantly updated about my child's progress. The weekly tests and parent reports are excellent. The teachers genuinely care about each student's success."</blockquote><div class="testimonial-author"><div class="testimonial-avatar">ML</div><div class="testimonial-author-info"><h4>Mrs. Lakshmi</h4><span>Parent of Class 12 Student</span></div></div></div></div>
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><blockquote>"The Commerce faculty at Fusion is outstanding. Accounts and Economics were explained with such clarity that even complex topics felt simple. Scored 98.8% in my boards!"</blockquote><div class="testimonial-author"><div class="testimonial-avatar">AM</div><div class="testimonial-author-info"><h4>Arjun Mehta</h4><span>Class 12 Commerce 2024</span></div></div></div></div>
+          </div>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <div class="carousel-controls"><button id="prevTestimonial" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button><button id="nextTestimonial" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY (Preserved) -->
+    <section class="section" id="gallery" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal"><h2>Our Gallery</h2><p>Glimpses of life at Fusion Coaching</p></div>
+        <div class="gallery-grid">
+          <div class="gallery-item reveal"><svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#e0e7ff,#c7d2fe);"><rect width="400" height="300" fill="none"/><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Classroom Session</text></svg><div class="gallery-overlay"><span>Smart Classroom</span></div></div>
+          <div class="gallery-item reveal"><svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#dbeafe,#bfdbfe);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Lab Session</text></svg><div class="gallery-overlay"><span>Physics Lab</span></div></div>
+          <div class="gallery-item reveal"><svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#e0e7ff,#ddd6fe);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Library</text></svg><div class="gallery-overlay"><span>Study Library</span></div></div>
+          <div class="gallery-item reveal"><svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#fce7f3,#fbcfe8);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Award Ceremony</text></svg><div class="gallery-overlay"><span>Award Ceremony</span></div></div>
+          <div class="gallery-item reveal"><svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#d1fae5,#a7f3d0);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Events</text></svg><div class="gallery-overlay"><span>Annual Function</span></div></div>
+          <div class="gallery-item reveal"><svg viewBox="0 0 400 300" style="width:100%;height:100%;background:linear-gradient(135deg,#fef3c7,#fde68a);"><text x="200" y="160" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1a56db" opacity="0.4">Batch Photo</text></svg><div class="gallery-overlay"><span>Batch of 2024</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMISSION PROCESS (Preserved) -->
+    <section class="section" id="admission">
+      <div class="container">
+        <div class="section-title reveal"><h2>Admission Process</h2><p>Your journey to success starts here in 4 simple steps</p></div>
+        <div class="timeline">
+          <div class="timeline-item reveal"><div class="step-num">1</div><div class="content"><h3>Registration</h3><p>Fill out the online registration form or visit our center to register in person.</p></div></div>
+          <div class="timeline-item reveal"><div class="step-num">2</div><div class="content"><h3>Counseling</h3><p>Meet our academic counselors for a personalized discussion about your goals.</p></div></div>
+          <div class="timeline-item reveal"><div class="step-num">3</div><div class="content"><h3>Admission</h3><p>Complete the admission formalities, submit required documents, and pay the fees.</p></div></div>
+          <div class="timeline-item reveal"><div class="step-num">4</div><div class="content"><h3>Start Learning</h3><p>Begin your academic journey with expert faculty and a structured learning path.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ (Preserved) -->
+    <section class="section" id="faq" style="background:var(--bg-alt);">
+      <div class="container">
+        <div class="section-title reveal"><h2>Frequently Asked Questions</h2><p>Everything you need to know about Fusion Coaching</p></div>
+        <div class="faq-list">
+          <div class="faq-item reveal"><button class="faq-question">What courses does Fusion Coaching offer? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>We offer Science courses (Class 9-12 PCM, Physics, Chemistry, Mathematics, JEE Foundation) and Commerce courses (Class 11-12 Commerce, Accounts, Economics, Business Studies).</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">What is the batch size? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>We maintain small batch sizes of 25-30 students per class to ensure individual attention.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">Are there any scholarship programs? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Yes, we offer merit-based scholarships for students with excellent academic records.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">Do you provide study material? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Absolutely! We provide comprehensive digital and printed study materials, practice question banks, and previous year question papers.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">How can I enroll? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>You can visit our center directly, call us at +91 87005 17172, or fill out the contact form.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-question">Is there a demo class available? <i class="fas fa-chevron-down"></i></button><div class="faq-answer"><p>Yes, we offer free demo classes so you can experience our teaching methodology before enrolling.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (Preserved) -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-title reveal"><h2>Get In Touch</h2><p>We'd love to hear from you. Reach out for admissions or inquiries.</p></div>
+        <div class="contact-grid">
+          <div class="contact-form reveal">
+            <h3>Send Us a Message</h3>
+            <form id="contactForm" novalidate>
+              <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" name="name" placeholder="Enter your full name" required><div class="error">Please enter your name</div></div>
+              <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" placeholder="Enter your email" required><div class="error">Please enter a valid email</div></div>
+              <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required pattern="[0-9]{10,}"><div class="error">Please enter a valid 10-digit phone number</div></div>
+              <div class="form-group"><label for="course">Course Interested In</label><select id="course" name="course"><option value="">Select a course</option><option>Class 9 Science Foundation</option><option>Class 10 Science</option><option>Class 11 PCM</option><option>Class 12 PCM</option><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>JEE Foundation</option><option>Class 11 Commerce</option><option>Class 12 Commerce</option><option>Accounts</option><option>Economics</option><option>Business Studies</option></select></div>
+              <div class="form-group"><label for="message">Message *</label><textarea id="message" name="message" placeholder="Write your message here..." required></textarea><div class="error">Please enter your message</div></div>
+              <button type="submit" class="btn btn-primary ripple" style="width:100%;justify-content:center;"><i class="fas fa-paper-plane"></i> Send Message</button>
+              <div class="form-success" id="formSuccess"><i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.</div>
+            </form>
+          </div>
+          <div class="contact-info reveal">
+            <div class="contact-info-card"><i class="fas fa-phone-alt"></i><div><h4>Call Us</h4><p>+91 87005 17172</p><p>+91 87005 17173</p></div></div>
+            <div class="contact-info-card"><i class="fas fa-map-marker-alt"></i><div><h4>Visit Us</h4><p>E2/005 Bharat City, Near Teela Mod,<br>Opposite City Mall, India</p></div></div>
+            <div class="contact-info-card"><i class="fas fa-envelope"></i><div><h4>Email Us</h4><p>info@fusioncoaching.in</p><p>admissions@fusioncoaching.in</p></div></div>
+            <div class="contact-info-card"><i class="far fa-clock"></i><div><h4>Working Hours</h4><p>Monday - Saturday: 6:00 AM - 8:00 PM</p><p>Sunday: 8:00 AM - 2:00 PM</p></div></div>
+            <div class="contact-map"><iframe src="https://maps.google.com/maps?q=Bharat%20City%20Teela%20Mod&t=&z=13&ie=UTF8&iwloc=&output=embed" title="Fusion Coaching Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (Preserved) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><h2>Fusion Coaching</h2><p>Empowering students with quality education since 2016. We are committed to shaping the next generation of leaders, innovators, and achievers through academic excellence and personal mentorship.</p><div class="footer-social"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a><a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div></div>
+        <div><h3>Quick Links</h3><div class="footer-links"><a href="#home">Home</a><a href="#about">About Us</a><a href="#courses">Courses</a><a href="#faculty">Faculty</a><a href="#results">Results</a><a href="#testimonials">Testimonials</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a></div></div>
+        <div><h3>Courses</h3><div class="footer-links"><a href="#courses">Class 9-10 Science</a><a href="#courses">Class 11-12 PCM</a><a href="#courses">Physics, Chemistry, Maths</a><a href="#courses">JEE Foundation</a><a href="#courses">Class 11-12 Commerce</a><a href="#courses">Accounts & Economics</a></div></div>
+        <div><h3>Contact Details</h3><div class="footer-contact"><p><i class="fas fa-phone-alt"></i> +91 87005 17172</p><p><i class="fas fa-envelope"></i> info@fusioncoaching.in</p><p><i class="fas fa-map-marker-alt"></i> E2/005 Bharat City, Near Teela Mod</p><p><i class="far fa-clock"></i> Mon-Sat: 6:00 AM - 8:00 PM</p></div></div>
+      </div>
+      <div class="footer-bottom"><span>Â© 2026 Fusion Coaching. All rights reserved.</span><span><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Refund Policy</a></span></div>
+    </div>
+  </footer>
+
+  <!-- ===================== LOGIN PAGE ===================== -->
+  <div class="auth-page" id="authPage">
+    <div class="auth-container">
+      <div class="auth-header">
+        <div class="logo">Fusion Coaching</div>
+        <p>Access your personalized dashboard</p>
+        <div class="role-badge student" id="authRoleBadge">STUDENT</div>
+      </div>
+      <div class="auth-role-selector">
+        <button class="auth-role-btn active" data-role="student" onclick="switchAuthRole('student')"><i class="fas fa-user-graduate"></i> Student</button>
+        <button class="auth-role-btn" data-role="teacher" onclick="switchAuthRole('teacher')"><i class="fas fa-chalkboard-teacher"></i> Teacher</button>
+        <button class="auth-role-btn" data-role="parent" onclick="switchAuthRole('parent')"><i class="fas fa-users"></i> Parent</button>
+        <button class="auth-role-btn" data-role="admin" onclick="switchAuthRole('admin')"><i class="fas fa-shield-alt"></i> Admin</button>
+      </div>
+      <div class="auth-error" id="authError"></div>
+      <form class="auth-form" id="loginForm">
+        <input type="hidden" id="authRole" value="student">
+        <div class="form-group"><label>Email / Student ID</label><div class="input-wrapper"><i class="fas fa-envelope"></i><input type="text" id="loginEmail" placeholder="Enter your email or ID" required></div></div>
+        <div class="form-group"><label>Password</label><div class="input-wrapper"><i class="fas fa-lock"></i><input type="password" id="loginPassword" placeholder="Enter your password" required><button type="button" class="password-toggle" onclick="togglePassword(this)"><i class="fas fa-eye"></i></button></div></div>
+        <div class="auth-options"><label><input type="checkbox" id="rememberMe"> Remember me</label><a href="#" onclick="showToast('Contact admin to reset password','info')">Forgot password?</a></div>
+        <button type="submit" class="auth-btn" id="loginBtn"><span class="btn-text"><i class="fas fa-arrow-right"></i> Sign In</span><span class="spinner"></span></button>
+      </form>
+      <div class="auth-footer">
+        <p>New student? <a href="#" onclick="closeLogin()">Contact us for admission</a></p>
+        <p style="margin-top:8px;font-size:11px;opacity:0.6"><a href="#" onclick="closeLogin()"><i class="fas fa-arrow-left"></i> Back to website</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== STUDENT DASHBOARD ===================== -->
+  <div class="dashboard-page" id="studentDashboard">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header"><div class="logo">Fusion <span>Student</span></div><button class="sidebar-close" onclick="document.querySelectorAll('.dashboard-sidebar')[0].classList.remove('open')"><i class="fas fa-times"></i></button></div>
+      <div class="sidebar-user"><div class="sidebar-avatar" id="studentAvatar">S</div><div class="sidebar-user-info"><h4 id="studentSidebarName">Student</h4><p id="studentSidebarId">ID: N/A</p></div></div>
+      <nav class="sidebar-nav">
+        <div class="nav-label">Main</div>
+        <a href="#" class="active" onclick="studentNavigate('dashboard')"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="#" onclick="studentNavigate('attendance')"><i class="fas fa-calendar-check"></i> Attendance</a>
+        <a href="#" onclick="studentNavigate('marks')"><i class="fas fa-chart-line"></i> Marks</a>
+        <a href="#" onclick="studentNavigate('tests')"><i class="fas fa-pencil-alt"></i> Online Tests</a>
+        <a href="#" onclick="studentNavigate('materials')"><i class="fas fa-book"></i> Study Materials</a>
+        <a href="#" onclick="studentNavigate('lectures')"><i class="fas fa-video"></i> Lectures</a>
+        <a href="#" onclick="studentNavigate('doubts')"><i class="fas fa-question-circle"></i> Doubts</a>
+        <div class="nav-label">Account</div>
+        <a href="#" onclick="studentNavigate('fee')"><i class="fas fa-rupee-sign"></i> Fee & Payments</a>
+        <a href="#" onclick="studentNavigate('profile')"><i class="fas fa-user-circle"></i> My Profile</a>
+      </nav>
+      <div class="sidebar-footer"><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</a></div>
+    </aside>
+    <div class="dashboard-main">
+      <div class="dashboard-topbar">
+        <div class="topbar-left"><button class="menu-toggle" onclick="document.querySelectorAll('.dashboard-sidebar')[0].classList.toggle('open')"><i class="fas fa-bars"></i></button><h2 id="studentGreeting">Welcome!</h2></div>
+        <div class="topbar-right"><button class="topbar-notif" onclick="showToast('Notifications','info')"><i class="fas fa-bell"></i><span class="dot" id="notifDot" style="display:none"></span></button><button onclick="toggleTheme()" style="background:none;border:none;color:var(--text-secondary);font-size:18px;padding:8px;cursor:pointer"><i class="fas fa-moon" id="dashThemeIcon"></i></button></div>
+      </div>
+      <div class="dashboard-content">
+        <div class="content-card" id="feeWarning" style="display:none;border-color:var(--danger);background:rgba(239,68,68,0.05)"><div class="warning-text" style="color:var(--danger);font-weight:600"></div><button class="btn btn-sm btn-primary" onclick="studentNavigate('fee')" style="margin-top:10px">Pay Now</button></div>
+        <div class="dashboard-section active" id="stu_dashboard">
+          <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">
+            <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:#10b981"><i class="fas fa-check-circle"></i></div><div class="stat-value" id="statAttendance">0%</div><div class="stat-label">Attendance</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:rgba(59,130,246,0.1);color:#3b82f6"><i class="fas fa-calendar-day"></i></div><div class="stat-value" id="statMonthly">0/0</div><div class="stat-label">This Month</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b"><i class="fas fa-question-circle"></i></div><div class="stat-value" id="statDoubts">0</div><div class="stat-label">Pending Doubts</div></div>
+            <div class="stat-card"><div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444"><i class="fas fa-bell"></i></div><div class="stat-value" id="statNotifs">0</div><div class="stat-label">Notifications</div></div>
+          </div>
+          <div class="grid-2" style="margin-top:24px">
+            <div class="content-card"><div class="card-header"><h3>Recent Marks</h3><button class="card-action" onclick="studentNavigate('marks')">View All</button></div><table class="data-table"><thead><tr><th>Subject</th><th>Exam</th><th>Marks</th><th>%</th><th>Grade</th></tr></thead><tbody id="recentMarksBody"><tr><td colspan="5" style="text-align:center;color:var(--text-light)">Loading...</td></tr></tbody></table></div>
+            <div class="content-card"><div class="card-header"><h3>Upcoming Tests</h3></div><div id="upcomingTestsList"><p style="color:var(--text-light);text-align:center">Loading...</p></div></div>
+          </div>
+          <div class="content-card" style="margin-top:24px"><div class="card-header"><h3>Notifications</h3></div><div id="notifList"><p style="color:var(--text-light);text-align:center">Loading...</p></div></div>
+        </div>
+        <div class="dashboard-section" id="stu_marks" style="display:none"><div class="grid-2" id="overallStats"></div><div id="marksContent"></div></div>
+        <div class="dashboard-section" id="stu_attendance" style="display:none"><div class="content-card"><h3>Attendance</h3><div id="attendanceContent"></div></div></div>
+        <div class="dashboard-section" id="stu_tests" style="display:none"><div class="grid-2"><div class="content-card"><div class="card-header"><h3>Available Tests</h3></div><div id="availableTests"></div></div><div class="content-card"><div class="card-header"><h3>Attempted</h3></div><div id="attemptedTests"></div></div></div></div>
+        <div class="dashboard-section" id="stu_fee" style="display:none"><div class="content-card"><div class="card-header"><h3>Fee Status</h3></div><div id="feeStatus"></div></div></div>
+        <div class="dashboard-section" id="stu_doubts" style="display:none"><div class="content-card"><div class="card-header"><h3>Ask a Doubt</h3></div><div class="form-group"><select id="doubtSubject" class="form-select"><option value="">Select Subject</option></select></div><div class="form-group"><textarea id="doubtText" class="form-input" rows="3" placeholder="Type your doubt..."></textarea></div><button class="btn btn-primary" onclick="submitDoubt()"><i class="fas fa-paper-plane"></i> Submit</button></div><div class="content-card"><div class="card-header"><h3>My Doubts</h3></div><div id="doubtsList"></div></div></div>
+        <div class="dashboard-section" id="stu_materials" style="display:none"><div class="content-card"><div class="card-header"><h3>Study Materials</h3></div><div id="materialsList"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TEACHER DASHBOARD ===================== -->
+  <div class="dashboard-page" id="teacherDashboard">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header"><div class="logo">Fusion <span>Teacher</span></div><button class="sidebar-close" onclick="document.querySelectorAll('.dashboard-sidebar')[1].classList.remove('open')"><i class="fas fa-times"></i></button></div>
+      <div class="sidebar-user"><div class="sidebar-avatar">T</div><div class="sidebar-user-info"><h4 id="teacherName">Teacher</h4><p>Faculty Dashboard</p></div></div>
+      <nav class="sidebar-nav">
+        <a href="#" class="active" onclick="teacherNavigate('dashboard')"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="#" onclick="teacherNavigate('attendance')"><i class="fas fa-calendar-check"></i> Mark Attendance</a>
+        <a href="#" onclick="teacherNavigate('marks')"><i class="fas fa-chart-line"></i> Enter Marks</a>
+        <a href="#" onclick="teacherNavigate('materials')"><i class="fas fa-upload"></i> Upload Materials</a>
+        <a href="#" onclick="teacherNavigate('tests')"><i class="fas fa-pencil-alt"></i> Create Tests</a>
+        <a href="#" onclick="teacherNavigate('doubts')"><i class="fas fa-question-circle"></i> Doubts</a>
+      </nav>
+      <div class="sidebar-footer"><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</a></div>
+    </aside>
+    <div class="dashboard-main">
+      <div class="dashboard-topbar"><div class="topbar-left"><button class="menu-toggle" onclick="document.querySelectorAll('.dashboard-sidebar')[1].classList.toggle('open')"><i class="fas fa-bars"></i></button><h2>Teacher Dashboard</h2></div></div>
+      <div class="dashboard-content">
+        <div class="dashboard-section active" id="tch_dashboard">
+          <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)" id="teacherStats"></div>
+          <div class="grid-2" style="margin-top:24px"><div class="content-card"><div class="card-header"><h3>My Classes</h3></div><div id="teacherClasses"></div></div><div class="content-card"><div class="card-header"><h3>Pending Doubts</h3></div><div id="teacherDoubtsMini"></div></div></div>
+        </div>
+        <div class="dashboard-section" id="tch_attendance" style="display:none">
+          <div class="content-card"><div class="card-header"><h3>Mark Attendance</h3></div><div class="grid-3"><div class="form-group"><label>Class</label><select id="attClass" class="form-select"></select></div><div class="form-group"><label>Date</label><input type="date" id="attDate" class="form-input"></div><div class="form-group"><label>Period</label><select id="attPeriod" class="form-select"><option value="full_day">Full Day</option><option value="morning">Morning</option><option value="afternoon">Afternoon</option></select></div></div><button class="btn btn-primary" onclick="loadAttendanceStudents()"><i class="fas fa-search"></i> Load</button><div id="attendanceTableWrap" style="margin-top:16px;display:none"><table class="data-table"><thead><tr><th>Roll</th><th>Name</th><th>Status</th></tr></thead><tbody id="attendanceBody"></tbody></table><button class="btn btn-primary" onclick="submitAttendance()" style="margin-top:12px"><i class="fas fa-save"></i> Save</button></div></div>
+        </div>
+        <div class="dashboard-section" id="tch_marks" style="display:none">
+          <div class="content-card"><div class="card-header"><h3>Bulk Marks Entry</h3></div><div id="marksEntrySelectors"></div><div style="overflow-x:auto;margin-top:16px"><table class="data-table" id="bulkMarksTable" style="display:none"><thead><tr><th>Roll</th><th>Student</th><th>Marks</th><th>Max</th></tr></thead><tbody id="bulkMarksBody"></tbody></table></div><button class="btn btn-primary" id="submitBulkMarks" style="display:none;margin-top:12px" onclick="submitBulkMarks()"><i class="fas fa-save"></i> Save All Marks</button></div>
+        </div>
+        <div class="dashboard-section" id="tch_doubts" style="display:none"><div class="content-card"><div class="card-header"><h3>Student Doubts</h3></div><div id="teacherDoubtsList"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PARENT DASHBOARD ===================== -->
+  <div class="dashboard-page" id="parentDashboard">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header"><div class="logo">Fusion <span>Parent</span></div><button class="sidebar-close" onclick="document.querySelectorAll('.dashboard-sidebar')[2].classList.remove('open')"><i class="fas fa-times"></i></button></div>
+      <div class="sidebar-user"><div class="sidebar-avatar">P</div><div class="sidebar-user-info"><h4 id="parentName">Parent</h4><p>Parent Dashboard</p></div></div>
+      <nav class="sidebar-nav"><a href="#" class="active" onclick="parentNavigate('dashboard')"><i class="fas fa-th-large"></i> Dashboard</a><a href="#" onclick="parentNavigate('fee')"><i class="fas fa-rupee-sign"></i> Fee Payment</a><a href="#" onclick="showToast('Contact admin for queries','info')"><i class="fas fa-envelope"></i> Query</a></nav>
+      <div class="sidebar-footer"><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</a></div>
+    </aside>
+    <div class="dashboard-main">
+      <div class="dashboard-topbar"><div class="topbar-left"><button class="menu-toggle" onclick="document.querySelectorAll('.dashboard-sidebar')[2].classList.toggle('open')"><i class="fas fa-bars"></i></button><h2>Parent Dashboard</h2></div></div>
+      <div class="dashboard-content"><div class="dashboard-section active" id="par_dashboard"><div id="childrenCards"></div></div></div>
+    </div>
+  </div>
+
+  <!-- ===================== ADMIN DASHBOARD ===================== -->
+  <div class="dashboard-page" id="adminDashboard">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header"><div class="logo">Fusion <span>Admin</span></div><button class="sidebar-close" onclick="document.querySelectorAll('.dashboard-sidebar')[3].classList.remove('open')"><i class="fas fa-times"></i></button></div>
+      <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626)">A</div><div class="sidebar-user-info"><h4>Administrator</h4><p>Full Access</p></div></div>
+      <nav class="sidebar-nav">
+        <div class="nav-label">Management</div>
+        <a href="#" class="active" onclick="adminNavigate('dashboard')"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="#" onclick="adminNavigate('students')"><i class="fas fa-user-graduate"></i> Students</a>
+        <a href="#" onclick="adminNavigate('teachers')"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
+        <a href="#" onclick="adminNavigate('classes')"><i class="fas fa-school"></i> Classes</a>
+        <div class="nav-label">Academic</div>
+        <a href="#" onclick="adminNavigate('marks')"><i class="fas fa-chart-line"></i> Enter Marks (Bulk)</a>
+        <a href="#" onclick="adminNavigate('attendance')"><i class="fas fa-calendar-check"></i> Attendance</a>
+        <div class="nav-label">Finance</div>
+        <a href="#" onclick="adminNavigate('fees')"><i class="fas fa-rupee-sign"></i> Fee Management</a>
+        <div class="nav-label">System</div>
+        <a href="#" onclick="adminNavigate('whatsapp')"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </nav>
+      <div class="sidebar-footer"><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</a></div>
+    </aside>
+    <div class="dashboard-main">
+      <div class="dashboard-topbar"><div class="topbar-left"><button class="menu-toggle" onclick="document.querySelectorAll('.dashboard-sidebar')[3].classList.toggle('open')"><i class="fas fa-bars"></i></button><h2>Admin Panel</h2></div></div>
+      <div class="dashboard-content">
+        <div class="dashboard-section active" id="adm_dashboard"><div class="stat-grid" style="grid-template-columns:repeat(4,1fr)" id="adminStats"></div><div class="grid-2" style="margin-top:24px"><div class="content-card"><div class="card-header"><h3>Recent Activity</h3></div><div id="adminRecentActivity"></div></div><div class="content-card"><div class="card-header"><h3>Quick Actions</h3></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-primary btn-sm" onclick="adminNavigate('students')"><i class="
+        <div class="dashboard-section active" id="adm_dashboard">
+          <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)" id="adminStats"></div>
+          <div class="grid-2" style="margin-top:24px">
+            <div class="content-card"><div class="card-header"><h3>Recent Activity</h3></div><div id="adminRecentActivity"></div></div>
+            <div class="content-card"><div class="card-header"><h3>Quick Actions</h3></div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button class="btn btn-primary btn-sm" onclick="adminNavigate('students')"><i class="fas fa-user-graduate"></i> Manage Students</button>
+                <button class="btn btn-primary btn-sm" onclick="adminNavigate('marks')"><i class="fas fa-chart-line"></i> Enter Marks</button>
+                <button class="btn btn-primary btn-sm" onclick="adminNavigate('fees')"><i class="fas fa-rupee-sign"></i> Fees</button>
+                <button class="btn btn-primary btn-sm" onclick="adminNavigate('whatsapp')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-section" id="adm_students" style="display:none">
+          <div class="content-card">
+            <div class="card-header"><h3>Student Management</h3>
+              <button class="card-action" onclick="showAddStudentModal()"><i class="fas fa-plus"></i> Add Student</button>
+            </div>
+            <div class="form-group"><input type="text" class="form-input" placeholder="Search students..." id="studentSearch" onkeyup="loadAdminStudents()"></div>
+            <p style="margin-bottom:12px;color:var(--text-light)">Total: <strong id="totalStudentsCount">0</strong></p>
+            <div style="overflow-x:auto">
+              <table class="data-table">
+                <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Class</th><th>Roll</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="adminStudentsBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-section" id="adm_teachers" style="display:none">
+          <div class="content-card">
+            <div class="card-header"><h3>Teacher Management</h3></div>
+            <div style="overflow-x:auto">
+              <table class="data-table"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Qualification</th><th>Experience</th><th>Status</th></tr></thead>
+              <tbody id="adminTeachersBody"></tbody></table>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-section" id="adm_marks" style="display:none">
+          <div class="content-card">
+            <div class="card-header"><h3>ðŸ“Š Bulk Marks Entry (Single Slide)</h3></div>
+            <div id="marksEntrySelectors"></div>
+            <div style="overflow-x:auto;margin-top:16px">
+              <table class="data-table" id="bulkMarksTable" style="display:none">
+                <thead><tr><th>Roll</th><th>Student ID</th><th>Name</th><th>Marks Obtained</th><th>Max Marks</th></tr></thead>
+                <tbody id="bulkMarksBody"></tbody>
+              </table>
+            </div>
+            <button class="btn btn-primary" id="submitBulkMarks" style="display:none;margin-top:16px" onclick="submitBulkMarks()"><i class="fas fa-save"></i> âœ… Save All Marks</button>
+          </div>
+        </div>
+        <div class="dashboard-section" id="adm_fees" style="display:none">
+          <div class="content-card">
+            <div class="card-header"><h3>Fee Management</h3></div>
+            <div id="feeManagementContent"><p style="color:var(--text-light)">Loading...</p></div>
+          </div>
+          <div class="content-card"><div class="card-header"><h3>Send Fee Reminders</h3></div>
+            <button class="btn btn-primary" onclick="sendFeeReminders()"><i class="fab fa-whatsapp"></i> Send WhatsApp Reminders to All</button>
+          </div>
+        </div>
+        <div class="dashboard-section" id="adm_whatsapp" style="display:none">
+          <div class="content-card">
+            <div class="card-header"><h3>WhatsApp Integration</h3></div>
+            <div class="form-group"><label>Test Phone Number (with country code)</label><input type="text" id="whatsappTestPhone" class="form-input" placeholder="+918700517172"></div>
+            <button class="btn btn-primary" onclick="testWhatsApp()"><i class="fab fa-whatsapp"></i> Send Test Message</button>
+            <div id="whatsappResult" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TOAST CONTAINER ===================== -->
+  <div class="toast-container"></div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="/static/dashboard.js"></script>
+  <script>
+    // ===== ORIGINAL WEBSITE SCRIPTS (Fully Preserved) =====
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        setTimeout(function() { document.getElementById('loader').classList.add('hidden'); }, 1500);
+      });
+      const themeToggleTopbar = document.getElementById('themeToggleTopbar');
+      const themeIconTopbar = document.getElementById('themeIconTopbar');
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('fusion-theme', theme);
+        const isDark = theme === 'dark';
+        if(themeIconTopbar) themeIconTopbar.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        document.querySelectorAll('#dashThemeIcon, #themeIconMobile').forEach(el => { if(el) el.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; });
+      }
+      const savedTheme = localStorage.getItem('fusion-theme') || 'light';
+      setTheme(savedTheme);
+      window.toggleTheme = function() {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      };
+      if(themeToggleTopbar) themeToggleTopbar.addEventListener('click', window.toggleTheme);
+
+      // Mobile menu
+      const navToggle = document.getElementById('navToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if(navToggle && mobileMenu) {
+        navToggle.addEventListener('click', function() {
+          navToggle.classList.toggle('active');
+          mobileMenu.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', navToggle.classList.contains('active') ? 'true' : 'false');
+        });
+      }
+      window.closeMobileMenu = function() {
+        if(navToggle && mobileMenu) { navToggle.classList.remove('active'); mobileMenu.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }
+      };
+      if(mobileMenu) mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMobileMenu));
+
+      // Nav scroll
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', function() {
+        if(window.scrollY > 60) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+      }, {passive:true});
+
+      // Scroll top
+      const scrollTopBtn = document.getElementById('scrollTop');
+      window.addEventListener('scroll', function() {
+        if(scrollTopBtn) scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+      }, {passive:true});
+      if(scrollTopBtn) scrollTopBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+      // Counters
+      const counters = document.querySelectorAll('.counter');
+      function animateCounters() {
+        counters.forEach(function(counter) {
+          const target = parseInt(counter.getAttribute('data-target'));
+          const current = parseInt(counter.textContent);
+          if(current < target) {
+            counter.textContent = Math.min(current + Math.ceil(target/40), target);
+            setTimeout(animateCounters, 30);
+          } else counter.textContent = target;
+        });
+      }
+      setTimeout(animateCounters, 600);
+
+      // Scroll reveal
+      const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+      function checkReveal() {
+        revealElements.forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          if(rect.top < window.innerHeight - 40) el.classList.add('visible');
+        });
+      }
+      window.addEventListener('scroll', checkReveal, {passive:true});
+      checkReveal();
+
+      // Testimonials carousel
+      const track = document.getElementById('testimonialTrack');
+      if(track) {
+        const slides = track.querySelectorAll('.testimonial-slide');
+        const dotsContainer = document.getElementById('carouselDots');
+        let currentSlide = 0, autoSlideInterval;
+        slides.forEach(function(_, i) {
+          const dot = document.createElement('div');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', function() { goToSlide(i); resetAutoSlide(); });
+          if(dotsContainer) dotsContainer.appendChild(dot);
+        });
+        function goToSlide(index) { currentSlide = index; track.style.transform = 'translateX(' + (-currentSlide * 100) + '%)'; if(dotsContainer) dotsContainer.querySelectorAll('.carousel-dot').forEach((d,i) => d.classList.toggle('active', i === currentSlide)); }
+        document.getElementById('nextTestimonial')?.addEventListener('click', function() { goToSlide((currentSlide + 1) % slides.length); resetAutoSlide(); });
+        document.getElementById('prevTestimonial')?.addEventListener('click', function() { goToSlide((currentSlide - 1 + slides.length) % slides.length); resetAutoSlide(); });
+        function startAutoSlide() { autoSlideInterval = setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000); }
+        function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
+        startAutoSlide();
+      }
+
+      // FAQ accordion
+      document.querySelectorAll('.faq-item').forEach(function(item) {
+        item.querySelector('.faq-question').addEventListener('click', function() {
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+          if(!isOpen) item.classList.add('open');
+        });
+      });
+
+      // Contact form
+      const contactForm = document.getElementById('contactForm');
+      if(contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          let valid = true;
+          ['name','email','phone','message'].forEach(function(id) {
+            const input = document.getElementById(id);
+            if(!input) return;
+            const group = input.closest('.form-group');
+            if(id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) { group.classList.add('error'); valid = false; }
+            else if(id === 'phone' && !/^[0-9]{10,}$/.test(input.value.trim())) { group.classList.add('error'); valid = false; }
+            else if(input.value.trim().length === 0) { group.classList.add('error'); valid = false; }
+            else group.classList.remove('error');
+          });
+          if(valid) { document.getElementById('formSuccess').style.display = 'block'; contactForm.reset(); setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000); }
+        });
+        document.querySelectorAll('.form-group input, .form-group textarea').forEach(function(el) {
+          el.addEventListener('input', function() { this.closest('.form-group').classList.remove('error'); });
+        });
+      }
+    })();
+
+    // ===== TYPEWRITER EFFECT (Preserved) =====
+    (function() {
+      const words = ["Science Education","Physics Education","JEE Aspirants","NEET Aspirants","Board Toppers","Future Engineers","Future Doctors","Future Leaders"];
+      let wordIndex = 0, charIndex = 0, isDeleting = false;
+      const textElement = document.getElementById("changing-text");
+      if(textElement) {
+        function typeEffect() {
+          const currentWord = words[wordIndex];
+          textElement.textContent = isDeleting ? currentWord.substring(0, charIndex - 1) : currentWord.substring(0, charIndex + 1);
+          isDeleting ? charIndex-- : charIndex++;
+          let timeout = isDeleting ? 50 : 100;
+          if(!isDeleting && charIndex === currentWord.length) { timeout = 2000; isDeleting = true; }
+          else if(isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; timeout = 500; }
+          setTimeout(typeEffect, timeout);
+        }
+        setTimeout(typeEffect, 1000);
+      }
+    })();
+
+    // ===== DASHBOARD NAVIGATION & AUTH =====
+    const API_BASE = '/api';
+    let currentUser = null;
+
+    function showLogin(role) {
+      document.querySelector('main').style.display = 'none';
+      document.querySelector('.navbar').style.display = 'none';
+      document.getElementById('authPage').classList.add('active');
+      switchAuthRole(role);
+    }
+
+    function closeLogin() {
+      document.getElementById('authPage').classList.remove('active');
+      ['studentDashboard','teacherDashboard','parentDashboard','adminDashboard'].forEach(id => document.getElementById(id).classList.remove('active'));
+      document.querySelector('main').style.display = 'block';
+      document.querySelector('.navbar').style.display = 'flex';
+    }
+
+    function switchAuthRole(role) {
+      document.querySelectorAll('.auth-role-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.auth-role-btn[data-role="${role}"]`).classList.add('active');
+      document.getElementById('authRole').value = role;
+      const badge = document.getElementById('authRoleBadge');
+      badge.className = 'role-badge ' + role;
+      badge.textContent = role.toUpperCase();
+      document.getElementById('authError').classList.remove('show');
+    }
+
+    function togglePassword(btn) {
+      const input = btn.parentElement.querySelector('input');
+      const icon = btn.querySelector('i');
+      if(input.type === 'password') { input.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+      else { input.type = 'password'; icon.className = 'fas fa-eye'; }
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.querySelector('.toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icons = { success:'fa-check-circle', error:'fa-exclamation-circle', info:'fa-info-circle', warning:'fa-exclamation-triangle' };
+      toast.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i> ${message}`;
+      container.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; toast.style.transition = 'all 0.4s'; setTimeout(() => toast.remove(), 400); }, 4000);
+    }
+
+    // Login form handler
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      const email = document.getElementById('loginEmail').value.toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+      const role = document.getElementById('authRole').value;
+      const remember = document.getElementById('rememberMe').checked;
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ email, password, role, remember, device_id: localStorage.getItem('device_id') || crypto.randomUUID(), device_name: navigator.userAgent })
+        });
+        const data = await res.json();
+
+        if(data.success) {
+          currentUser = data.user;
+          localStorage.setItem('auth_role', data.role);
+          localStorage.setItem('auth_user', JSON.stringify(data.user));
+          document.getElementById('authPage').classList.remove('active');
+          document.getElementById(role + 'Dashboard').classList.add('active');
+          loadDashboard(role);
+          showToast('Welcome back, ' + data.user.name + '!', 'success');
+        } else {
+          const errorEl = document.getElementById('authError');
+          errorEl.textContent = data.message || data.error || 'Invalid credentials';
+          errorEl.classList.add('show');
+        }
+      } catch(e) {
+        document.getElementById('authError').textContent = 'Network error. Check your connection.';
+        document.getElementById('authError').classList.add('show');
+      }
+
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    });
+
+    // Logout
+    document.querySelectorAll('.logout-btn').forEach(btn => {
+      btn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        await fetch(`${API_BASE}/auth/logout`, {method:'POST'});
+        localStorage.removeItem('auth_role');
+        localStorage.removeItem('auth_user');
+        currentUser = null;
+        ['studentDashboard','teacherDashboard','parentDashboard','adminDashboard'].forEach(id => document.getElementById(id).classList.remove('active'));
+        closeLogin();
+        showToast('Logged out successfully', 'info');
+      });
+    });
+
+    // Menu toggle for all sidebars
+    document.querySelectorAll('.menu-toggle').forEach((btn, i) => {
+      btn.addEventListener('click', () => document.querySelectorAll('.dashboard-sidebar')[i].classList.toggle('open'));
+    });
+
+    // ===== DASHBOARD LOADERS =====
+    async function loadDashboard(role) {
+      try {
+        const res = await fetch(`${API_BASE}/${role}/dashboard`);
+        const data = await res.json();
+        if(role === 'student') renderStudentDashboard(data);
+        else if(role === 'teacher') renderTeacherDashboard(data);
+        else if(role === 'parent') renderParentDashboard(data);
+        else if(role === 'admin') renderAdminDashboard(data);
+      } catch(e) { showToast('Failed to load dashboard', 'error'); }
+    }
+
+    function renderStudentDashboard(data) {
+      if(!data) return;
+      document.getElementById('studentSidebarName').textContent = data.student.name;
+      document.getElementById('studentSidebarId').textContent = `ID: ${data.student.id} | ${data.student.class}`;
+      document.getElementById('studentGreeting').textContent = 'Welcome, ' + data.student.name.split(' ')[0] + '!';
+      document.getElementById('statAttendance').textContent = data.stats.attendance + '%';
+      document.getElementById('statMonthly').textContent = data.stats.monthly_present + '/' + data.stats.monthly_total;
+      document.getElementById('statDoubts').textContent = data.stats.pending_doubts;
+      document.getElementById('statNotifs').textContent = data.stats.unread_notifications;
+
+      if(data.marks) {
+        document.getElementById('recentMarksBody').innerHTML = data.marks.map(m => 
+          `<tr><td>${m.subject}</td><td>${m.exam}</td><td>${m.marks}/${m.max}</td><td>${m.percentage}%</td><td><span class="status-badge present">${m.grade || 'Pass'}</span></td></tr>`
+        ).join('');
+      }
+      if(data.upcoming_tests) {
+        document.getElementById('upcomingTestsList').innerHTML = data.upcoming_tests.map(t =>
+          `<div style="padding:12px 0;border-bottom:1px solid var(--border)"><strong>${t.title}</strong><br><span style="color:var(--text-secondary);font-size:13px">${t.subject} â€¢ ${t.date} â€¢ ${t.duration}min</span></div>`
+        ).join('') || '<p style="color:var(--text-light)">No upcoming tests</p>';
+      }
+      if(data.fee_status?.due) {
+        document.getElementById('feeWarning').style.display = 'block';
+        document.getElementById('feeWarning').querySelector('.warning-text').textContent = data.fee_status.locked ? 'âš ï¸ Account Locked! Fee overdue.' : 'âš ï¸ Fee overdue. Grace: ' + data.fee_status.grace_days + ' days';
+      }
+    }
+
+    function renderTeacherDashboard(data) {
+      if(!data) return;
+      document.getElementById('teacherName').textContent = data.teacher.name;
+      document.getElementById('teacherStats').innerHTML = `
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:#10b981"><i class="fas fa-users"></i></div><div class="stat-value">${data.stats.total_students}</div><div class="stat-label">Students</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(59,130,246,0.1);color:#3b82f6"><i class="fas fa-calendar-check"></i></div><div class="stat-value">${data.stats.today_attendance}</div><div class="stat-label">Today's Attendance</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b"><i class="fas fa-question-circle"></i></div><div class="stat-value">${data.stats.pending_doubts}</div><div class="stat-label">Pending Doubts</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444"><i class="fas fa-pencil-alt"></i></div><div class="stat-value">${data.stats.upcoming_tests}</div><div class="stat-label">Upcoming Tests</div></div>`;
+    }
+
+    function renderAdminDashboard(data) {
+      if(!data) return;
+      document.getElementById('adminStats').innerHTML = `
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1);color:#10b981"><i class="fas fa-user-graduate"></i></div><div class="stat-value">${data.stats.total_students}</div><div class="stat-label">Students</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(59,130,246,0.1);color:#3b82f6"><i class="fas fa-chalkboard-teacher"></i></div><div class="stat-value">${data.stats.total_teachers}</div><div class="stat-label">Teachers</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b"><i class="fas fa-rupee-sign"></i></div><div class="stat-value">â‚¹${(data.stats.total_fees/100000).toFixed(1)}L</div><div class="stat-label">Fees Collected</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444"><i class="fas fa-school"></i></div><div class="stat-value">${data.stats.total_classes}</div><div class="stat-label">Classes</div></div>`;
+      
+      if(data.recent_activity) {
+        document.getElementById('adminRecentActivity').innerHTML = data.recent_activity.map(a =>
+          `<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px"><strong>${a.action}</strong><br><span style="color:var(--text-secondary)">${a.details} â€¢ ${a.time}</span></div>`
+        ).join('');
+      }
+    }
+
+    // ===== NAVIGATION HELPERS =====
+    function hideAllSections(prefix) {
+      document.querySelectorAll(`.dashboard-section[id^="${prefix}_"]`).forEach(el => el.style.display = 'none');
+    }
+
+    window.studentNavigate = function(section) {
+      hideAllSections('stu');
+      const el = document.getElementById('stu_' + section);
+      if(el) { el.style.display = 'block'; }
+      else { document.getElementById('stu_dashboard').style.display = 'block'; }
+      if(section === 'marks') loadStudentMarks();
+      if(section === 'attendance') loadStudentAttendance();
+      if(section === 'tests') loadStudentTests();
+      if(section === 'fee') loadStudentFee();
+      if(section === 'doubts') loadStudentDoubts();
+      if(section === 'materials') loadStudentMaterials();
+    };
+
+    window.teacherNavigate = function(section) {
+      hideAllSections('tch');
+      const el = document.getElementById('tch_' + section);
+      if(el) { el.style.display = 'block'; }
+      else { document.getElementById('tch_dashboard').style.display = 'block'; }
+      if(section === 'attendance') loadTeacherAttendance();
+      if(section === 'marks') loadBulkMarksEntry('teacher');
+      if(section === 'doubts') loadTeacherDoubts();
+    };
+
+    window.parentNavigate = function(section) {
+      hideAllSections('par');
+      document.getElementById('par_' + section).style.display = 'block';
+    };
+
+    window.adminNavigate = function(section) {
+      hideAllSections('adm');
+      const el = document.getElementById('adm_' + section);
+      if(el) { el.style.display = 'block'; }
+      else { document.getElementById('adm_dashboard').style.display = 'block'; }
+      if(section === 'students') loadAdminStudents();
+      if(section === 'teachers') loadAdminTeachers();
+      if(section === 'marks') loadBulkMarksEntry('admin');
+      if(section === 'fees') loadAdminFees();
+    };
+
+    // ===== STUDENT MARKS =====
+    async function loadStudentMarks() {
+      try {
+        const res = await fetch(`${API_BASE}/student/marks`);
+        const data = await res.json();
+        if(data.exams) {
+          document.getElementById('marksContent').innerHTML = data.exams.map(exam => `
+            <div class="content-card"><div class="card-header"><h3>${exam.exam_name}</h3></div>
+            <table class="data-table"><thead><tr><th>Subject</th><th>Marks</th><th>Max</th><th>%</th><th>Grade</th></tr></thead>
+            <tbody>${exam.subjects.map(s => `<tr><td>${s.subject}</td><td>${s.marks}</td><td>${s.max}</td><td>${s.percentage}%</td><td><span class="status-badge present">${s.grade}</span></td></tr>`).join('')}</tbody></table></div>
+          `).join('');
+        }
+        if(data.overall) {
+          document.getElementById('overallStats').innerHTML = `
+            <div class="stat-card"><div class="stat-value">${data.overall.overall_percentage}%</div><div class="stat-label">Overall</div></div>
+            <div class="stat-card"><div class="stat-value">${data.overall.total_marks}/${data.overall.total_max}</div><div class="stat-label">Total Marks</div></div>`;
+        }
+      } catch(e) { showToast('Failed to load marks', 'error'); }
+    }
+
+    // ===== BULK MARKS ENTRY =====
+    async function loadBulkMarksEntry(source) {
+      try {
+        const [classesRes, subsRes] = await Promise.all([
+          fetch(`${API_BASE}/admin/classes`),
+          fetch(`${API_BASE}/admin/subjects`)
+        ]);
+        const classes = await classesRes.json();
+        const subjects = await subsRes.json();
+        
+        document.getElementById('marksEntrySelectors').innerHTML = `
+          <div class="grid-3">
+            <div class="form-group"><label>Class</label>
+              <select id="bulkClass" class="form-select" onchange="loadStudentsForMarks()">
+                <option value="">Select Class</option>
+                ${(classes.classes||[]).map(c => `<option value="${c.id}">${c.name}</option>`).join('')}
+              </select>
+            </div>
+            <div class="form-group"><label>Subject</label>
+              <select id="bulkSubject" class="form-select" onchange="loadStudentsForMarks()">
+                <option value="">Select Subject</option>
+                ${(subjects.subjects||[]).map(s => `<option value="${s.id}">${s.name}</option>`).join('')}
+              </select>
+            </div>
+            <div class="form-group"><label>Exam Type</label>
+              <select id="bulkExamType" class="form-select" onchange="loadStudentsForMarks()">
+                <option value="unit_test">Unit Test</option>
+                <option value="half_yearly">Half Yearly</option>
+                <option value="final">Final Exam</option>
+                <option value="monthly_test">Monthly Test</option>
+                <option value="pre_board">Pre Board</option>
+                <option value="weekly_test">Weekly Test</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label>Exam Name</label><input type="text" id="bulkExamName" class="form-input" placeholder="e.g. Unit Test 1 - March 2026"></div>`;
+      } catch(e) { showToast('Failed to load selectors', 'error'); }
+    }
+
+    window.loadStudentsForMarks = async function() {
+      const classId = document.getElementById('bulkClass')?.value;
+      const subjectId = document.getElementById('bulkSubject')?.value;
+      const examType = document.getElementById('bulkExamType')?.value;
+      if(!classId || !subjectId) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/marks/bulk?class_id=${classId}&subject_id=${subjectId}&exam_type=${examType}`);
+        const data = await res.json();
+        if(data.students) {
+          document.getElementById('bulkMarksBody').innerHTML = data.students.map(s => `
+            <tr>
+              <td>${s.roll}</td>
+              <td>${s.student_id}</td>
+              <td>${s.name}</td>
+              <td><input type="number" class="marks-input" data-student-id="${s.id}" value="${s.marks || ''}" placeholder="Marks" min="0" style="width:80px;padding:6px;border:1.5px solid var(--border);border-radius:6px;text-align:center"></td>
+              <td><input type="number" value="${s.max_marks || 100}" style="width:60px;padding:6px;border:1.5px solid var(--border);border-radius:6px;text-align:center" disabled></td>
+            </tr>
+          `).join('');
+          document.getElementById('bulkMarksTable').style.display = 'table';
+          document.getElementById('submitBulkMarks').style.display = 'block';
+        }
+      } catch(e) { showToast('Failed to load students', 'error'); }
+    };
+
+    window.submitBulkMarks = async function() {
+      const classId = document.getElementById('bulkClass')?.value;
+      const subjectId = document.getElementById('bulkSubject')?.value;
+      const examType = document.getElementById('bulkExamType')?.value;
+      const examName = document.getElementById('bulkExamName')?.value || examType;
+      
+      const entries = [];
+      document.querySelectorAll('.marks-input').forEach(input => {
+        if(input.value !== '') {
+          entries.push({ student_id: parseInt(input.dataset.studentId), marks_obtained: parseFloat(input.value), max_marks: 100 });
+        }
+      });
+      if(entries.length === 0) { showToast('No marks entered', 'warning'); return; }
+
+      try {
+        const res = await fetch(`${API_BASE}/admin/marks/bulk`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ class_id: parseInt(classId), subject_id: parseInt(subjectId), exam_type: examType, exam_name: examName, entries })
+        });
+        const data = await res.json();
+        if(data.success) { showToast('âœ… Marks saved for ' + data.count + ' students!', 'success'); loadStudentsForMarks(); }
+        else showToast('Failed to save', 'error');
+      } catch(e) { showToast('Server error', 'error'); }
+    };
+
+    // ===== ADMIN STUDENTS =====
+    async function loadAdminStudents() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/students`);
+        const data = await res.json();
+        if(data.students) {
+          document.getElementById('adminStudentsBody').innerHTML = data.students.map(s => `
+            <tr>
+              <td>${s.student_id}</td>
+              <td>${s.name}</td>
+              <td>${s.email}</td>
+              <td>${s.phone || '-'}</td>
+              <td>${s.class}</td>
+              <td>${s.roll || '-'}</td>
+              <td><span class="status-badge ${s.is_active ? 'active' : 'absent'}">${s.is_active ? 'Active' : 'Inactive'}</span>${s.fee_locked ? ' <span class="status-badge locked">Locked</span>' : ''}</td>
+              <td>
+                <button class="btn btn-sm btn-outline" onclick="showToast('Edit coming soon','info')"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger" onclick="toggleStudent(${s.id})"><i class="fas ${s.is_active ? 'fa-ban' : 'fa-check'}"></i></button>
+                ${s.fee_locked ? `<button class="btn btn-sm btn-primary" onclick="unlockStudent(${s.id})"><i class="fas fa-unlock"></i></button>` : ''}
+              </td>
+            </tr>
+          `).join('');
+          document.getElementById('totalStudentsCount').textContent = data.total;
+        }
+      } catch(e) { showToast('Failed to load students', 'error'); }
+    }
+
+    window.toggleStudent = async function(id) {
+      await fetch(`${API_BASE}/admin/student/${id}`, {method:'DELETE'});
+      loadAdminStudents();
+      showToast('Student status updated', 'success');
+    };
+
+    window.unlockStudent = async function(id) {
+      await fetch(`${API_BASE}/admin/student/fee/unlock/${id}`, {method:'POST'});
+      loadAdminStudents();
+      showToast('Student unlocked', 'success');
+    };
+
+    window.showAddStudentModal = function() {
+      showToast('Use POST /api/admin/students with JSON body to add', 'info');
+    };
+
+    // ===== ADMIN TEACHERS =====
+    async function loadAdminTeachers() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/teachers`);
+        const data = await res.json();
+        if(data.teachers) {
+          document.getElementById('adminTeachersBody').innerHTML = data.teachers.map(t => `
+            <tr><td>${t.teacher_id}</td><td>${t.name}</td><td>${t.email}</td><td>${t.phone || '-'}</td><td>${t.qualification || '-'}</td><td>${t.experience || 0}yrs</td><td><span class="status-badge active">Active</span></td></tr>
+          `).join('');
+        }
+      } catch(e) { showToast('Failed to load teachers', 'error'); }
+    }
+
+    // ===== ADMIN FEES =====
+    async function loadAdminFees() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/fees`);
+        const data = await res.json();
+        if(data.summary) {
+          document.getElementById('feeManagementContent').innerHTML = `
+            <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px">
+              <div class="stat-card"><div class="stat-value">â‚¹${(data.summary.total_collected/1000).toFixed(1)}K</div><div class="stat-label">Total Collected</div></div>
+              <div class="stat-card"><div class="stat-value">${data.summary.pending_count}</div><div class="stat-label">Pending/Locked</div></div>
+              <div class="stat-card"><div class="stat-value">${data.summary.total_payments}</div><div class="stat-label">Total Payments</div></div>
+            </div>
+            <table class="data-table"><thead><tr><th>Receipt</th><th>Student</th><th>Amount</th><th>Date</th><th>Mode</th><th>Status</th></tr></thead>
+            <tbody>${(data.payments||[]).map(p => `<tr><td>${p.receipt}</td><td>${p.student}</td><td>â‚¹${p.amount}</td><td>${p.date}</td><td>${p.mode}</td><td><span class="status-badge ${p.status === 'paid' ? 'paid' : 'pending'}">${p.status}</span></td></tr>`).join('')}</tbody></table>`;
+        }
+      } catch(e) { showToast('Failed to load fees', 'error'); }
+    }
+
+    window.sendFeeReminders = async function() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/fee/remind-all`, {method:'POST'});
+        const data = await res.json();
+        showToast(`âœ… WhatsApp reminders sent to ${data.sent} parents!`, 'success');
+      } catch(e) { showToast('Failed to send reminders', 'error'); }
+    };
+
+    // ===== WHATSAPP TEST =====
+    window.testWhatsApp = async function() {
+      const phone = document.getElementById('whatsappTestPhone').value;
+      if(!phone) { showToast('Enter a phone number', 'warning'); return; }
+      try {
+        const res = await fetch(`${API_BASE}/admin/whatsapp/test`, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({phone})
+        });
+        const data = await res.json();
+        if(data.success) showToast('âœ… WhatsApp test sent!', 'success');
+        else showToast('âŒ Failed: ' + (data.error || 'Check Twilio config'), 'error');
+      } catch(e) { showToast('Error sending test', 'error'); }
+    };
+
+    // ===== TEACHER FUNCTIONS =====
+    async function loadTeacherAttendance() {
+      try {
+        const res = await fetch(`${API_BASE}/teacher/attendance`);
+        const data = await res.json();
+        if(data.classes) {
+          document.getElementById('attClass').innerHTML = '<option value="">Select Class</option>' + data.classes.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+          document.getElementById('attDate').value = new Date().toISOString().split('T')[0];
+        }
+      } catch(e) { showToast('Failed to load', 'error'); }
+    }
+
+    window.loadAttendanceStudents = async function() {
+      const classId = document.getElementById('attClass').value;
+      const date = document.getElementById('attDate').value;
+      if(!classId || !date) { showToast('Select class and date', 'warning'); return; }
+      try {
+        const res = await fetch(`${API_BASE}/teacher/attendance?class_id=${classId}&date=${date}`);
+        const data = await res.json();
+        if(data.students) {
+          document.getElementById('attendanceBody').innerHTML = data.students.map(s => `
+            <tr>
+              <td>${s.roll}</td>
+              <td>${s.name}</td>
+              <td>
+                <select class="att-status" data-student-id="${s.id}" style="padding:4px 8px;border:1.5px solid var(--border);border-radius:6px">
+                  <option value="present" ${s.status === 'present' ? 'selected' : ''}>Present</option>
+                  <option value="absent" ${s.status === 'absent' ? 'selected' : ''}>Absent</option>
+                  <option value="late" ${s.status === 'late' ? 'selected' : ''}>Late</option>
+                  <option value="not_marked" ${s.status === 'not_marked' ? 'selected' : ''}>Not Marked</option>
+                </select>
+              </td>
+            </tr>
+          `).join('');
+          document.getElementById('attendanceTableWrap').style.display = 'block';
+        }
+      } catch(e) { showToast('Failed to load students', 'error'); }
+    };
+
+    window.submitAttendance = async function() {
+      const classId = document.getElementById('attClass').value;
+      const date = document.getElementById('attDate').value;
+      const period = document.getElementById('attPeriod').value;
+      const records = [];
+      document.querySelectorAll('.att-status').forEach(sel => {
+        records.push({ student_id: parseInt(sel.dataset.studentId), status: sel.value, class_id: parseInt(classId) });
+      });
+      try {
+        await fetch(`${API_BASE}/teacher/attendance`, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ records, date, period })
+        });
+        showToast('âœ… Attendance saved!', 'success');
+      } catch(e) { showToast('Failed to save', 'error'); }
+    };
+
+    async function loadTeacherDoubts() {
+      try {
+        const res = await fetch(`${API_BASE}/teacher/doubts`);
+        const data = await res.json();
+        if(data.doubts) {
+          document.getElementById('teacherDoubtsList').innerHTML = data.doubts.map(d => `
+            <div style="padding:16px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px">
+              <strong>${d.student_name}</strong> <span style="color:var(--text-secondary);font-size:13px">(${d.subject})</span>
+              <p style="margin:8px 0;color:var(--text);font-size:14px">${d.question}</p>
+              <small style="color:var(--text-light)">${d.created}</small>
+              <div style="margin-top:8px"><textarea id="doubtAnswer_${d.id}" class="form-input" rows="2" placeholder="Type your answer..."></textarea>
+              <button class="btn btn-sm btn-primary" onclick="replyToDoubt(${d.id})" style="margin-top:4px"><i class="fas fa-reply"></i> Reply</button></div>
+            </div>
+          `).join('') || '<p style="color:var(--text-light)">No pending doubts</p>';
+        }
+      } catch(e) { showToast('Failed to load doubts', 'error'); }
+    }
+
+    window.replyToDoubt = async function(id) {
+      const answer = document.getElementById('doubtAnswer_' + id).value;
+      if(!answer) { showToast('Enter an answer', 'warning'); return; }
+      await fetch(`${API_BASE}/teacher/doubt/${id}/reply`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({answer})
+      });
+      showToast('âœ… Doubt resolved!', 'success');
+      loadTeacherDoubts();
+    };
+
+    // ===== STUDENT FUNCTIONS =====
+    async function loadStudentTests() {
+      try {
+        const res = await fetch(`${API_BASE}/student/tests`);
+        const data = await res.json();
+        if(data.available) {
+          document.getElementById('availableTests').innerHTML = data.available.map(t => `
+            <div style="padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px">
+              <strong>${t.title}</strong> <span style="color:var(--text-secondary);font-size:13px">${t.subject}</span>
+              <p style="font-size:13px;color:var(--text-light)">${t.duration}min â€¢ ${t.marks}marks â€¢ ${t.questions}Q</p>
+              <button class="btn btn-sm btn-primary" onclick="showToast('Start test from portal','info')"><i class="fas fa-play"></i> Start</button>
+            </div>
+          `).join('') || '<p style="color:var(--text-light)">No tests available</p>';
+        }
+      } catch(e) {}
+    }
+
+    async function loadStudentFee() {
+      try {
+        const res = await fetch(`${API_BASE}/student/fee/status`);
+        const data = await res.json();
+        if(data.upcoming) {
+          document.getElementById('feeStatus').innerHTML = `
+            <div class="stat-grid" style="grid-template-columns:repeat(2,1fr)">
+              <div class="stat-card"><div class="stat-value">â‚¹${data.upcoming.amount}</div><div class="stat-label">Due Amount</div></div>
+              <div class="stat-card"><div class="stat-value ${data.upcoming.is_overdue ? 'stat-value' : ''}" style="color:${data.upcoming.is_overdue ? 'var(--danger)' : ''}">${data.upcoming.days_remaining}d</div><div class="stat-label">Days Remaining</div></div>
+            </div>
+            <p style="margin-top:12px;color:var(--text-secondary)">Due date: ${data.upcoming.due_date} | Grace: ${data.upcoming.grace_days_remaining} days</p>`;
+        }
+      } catch(e) {}
+    }
+
+    window.submitDoubt = async function() {
+      const text = document.getElementById('doubtText').value;
+      const subject = document.getElementById('doubtSubject').value;
+      if(!text) { showToast('Enter your doubt', 'warning'); return; }
+      await fetch(`${API_BASE}/student/doubts`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ question: text, subject_id: subject || null, title: text.substring(0,50) })
+      });
+      showToast('âœ… Doubt submitted!', 'success');
+      document.getElementById('doubtText').value = '';
+      loadStudentDoubts();
+    };
+
+    async function loadStudentDoubts() {
+      try {
+        const res = await fetch(`${API_BASE}/student/doubts`);
+        const data = await res.json();
+        if(data.doubts) {
+          document.getElementById('doubtsList').innerHTML = data.doubts.map(d => `
+            <div style="padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between">
+                <strong>${d.subject}</strong>
+                <span class="status-badge ${d.is_resolved ? 'present' : 'pending'}">${d.is_resolved ? 'Resolved' : 'Pending'}</span>
+              </div>
+              <p style="margin:8px 0;font-size:14px">${d.question}</p>
+              ${d.is_resolved ? `<div style="background:rgba(16,185,129,0.05);padding:10px;border-radius:8px;font-size:13px"><strong>Answer:</strong> ${d.answer}</div>` : ''}
+              <small style="color:var(--text-light)">${d.created}</small>
+            </div>
+          `).join('') || '<p style="color:var(--text-light)">No doubts yet</p>';
+        }
+        // Load subjects for doubt form
+        const subsRes = await fetch(`${API_BASE}/admin/subjects`);
+        const subs = await subsRes.json();
+        if(subs.subjects) {
+          document.getElementById('doubtSubject').innerHTML = '<option value="">General</option>' + subs.subjects.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+        }
+      } catch(e) {}
+    }
+
+    // ===== CHECK AUTH ON LOAD =====
+    (async function() {
+      try {
+        const res = await fetch(`${API_BASE}/auth/check`);
+        const data = await res.json();
+        if(data.authenticated) {
+          currentUser = data.user;
+          const role = data.role;
+          document.querySelector('main').style.display = 'none';
+          document.querySelector('.navbar').style.display = 'none';
+          document.getElementById(role + 'Dashboard').classList.add('active');
+          loadDashboard(role);
+        }
+      } catch(e) {}
+    })();
+  </script>
+</body>
+</html>
