@@ -16,7 +16,7 @@ import bleach
 
 from config import Config
 from models import db, Student, Teacher, Parent, Admin, Class, Subject, Timetable
-from models import AttendanceSession, Attendance, Marks, FeePayment, FeeReminder, WhatsAppLog
+from models import Attendance, Marks, FeePayment, FeeReminder, WhatsAppLog
 from models import Exam, TestScore, Doubt, StudyMaterial, BulkMarksEntry, AuditLog, Notification
 
 from auth import login_manager, role_required, check_role
