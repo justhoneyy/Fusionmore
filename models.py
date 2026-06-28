@@ -656,15 +656,15 @@ class AuditLog(db.Model):
     __tablename__ = 'audit_logs'
     
     id = db.Column(db.Integer, primary_key=True)
-    user_role = db.Column(db.String(20), db.Index)  # admin, teacher, student, parent, or None
-    user_id = db.Column(db.String(50), db.Index)
-    action = db.Column(db.String(100), nullable=False, db.Index)
+    user_role = db.Column(db.String(20), index=True)  # admin, teacher, student, parent, or None
+    user_id = db.Column(db.String(50), index=True)
+    action = db.Column(db.String(100), nullable=False, index=True)
     details = db.Column(db.Text)
     ip_address = db.Column(db.String(45))
     user_agent = db.Column(db.String(500))
     resource_type = db.Column(db.String(50))  # e.g., 'student', 'marks', 'fee'
     resource_id = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, db.Index)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     
     def to_dict(self):
         return {
