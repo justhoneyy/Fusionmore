@@ -1,602 +1,586 @@
+import os
+import uuid
+from datetime import datetime, date, timedelta
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-from datetime import datetime, date, timedelta
-import uuid
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
-# ===================== ASSOCIATION TABLES =====================
+# ===================== MIXINS =====================
+class TimestampMixin:
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-student_subjects = db.Table('student_subjects',
-    db.Column('student_id', db.Integer, db.ForeignKey('students.id'), primary_key=True),
-    db.Column('subject_id', db.Integer, db.ForeignKey('subjects.id'), primary_key=True)
-)
+# ===================== USER MODELS (Flask-Login compatible) =====================
+class Student(UserMixin, db.Model, TimestampMixin):
+    __tablename__ = 'students'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.String(20), unique=True, nullable=False, index=True)
+    name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False, index=True)
+    phone = db.Column(db.String(20))
+    password_hash = db.Column(db.String(256), nullable=False)
+    roll_number = db.Column(db.Integer)
+    is_active = db.Column(db.Boolean, default=True)
+    role = db.Column(db.String(20), default='student')
+    parent_id = db.Column(db.Integer, db.ForeignKey('parents.id'))
+    date_of_birth = db.Column(db.Date)
+    address = db.Column(db.Text)
+    emergency_contact = db.Column(db.String(20))
+    blood_group = db.Column(db.String(5))
+    medical_notes = db.Column(db.Text)
+    photo_url = db.Column(db.String(500))
+    last_login = db.Column(db.DateTime)
+    
+    # Relationships
+    attendances = db.relationship('Attendance', backref='student', lazy='dynamic')
+    marks = db.relationship('Marks', backref='student', lazy='dynamic')
+    fee_payments = db.relationship('FeePayment', backref='student', lazy='dynamic')
+    fee_reminders = db.relationship('FeeReminder', backref='student', lazy='dynamic')
+    doubts = db.relationship('Doubt', backref='student', lazy='dynamic')
+    class_enrollments = db.relationship('StudentClass', backref='student', lazy='dynamic')
+    test_scores = db.relationship('TestScore', backref='student', lazy='dynamic')
+    notifications = db.relationship('Notification', backref='student', lazy='dynamic',
+                                   foreign_keys='Notification.user_id',
+                                   primaryjoin='and_(Notification.user_id == Student.id, Notification.user_type == "student")')
+    
+    def get_id(self):
+        return str(self.id)
+    
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'name': self.name,
+            'email': self.email,
+            'phone': self.phone,
+            'roll_number': self.roll_number,
+            'is_active': self.is_active,
+            'role': self.role
+        }
 
-teacher_subjects = db.Table('teacher_subjects',
-    db.Column('teacher_id', db.Integer, db.ForeignKey('teachers.id'), primary_key=True),
-    db.Column('subject_id', db.Integer, db.ForeignKey('subjects.id'), primary_key=True)
-)
 
-class_subjects = db.Table('class_subjects',
-    db.Column('class_id', db.Integer, db.ForeignKey('classes.id'), primary_key=True),
-    db.Column('subject_id', db.Integer, db.ForeignKey('subjects.id'), primary_key=True)
-)
+class Teacher(UserMixin, db.Model, TimestampMixin):
+    __tablename__ = 'teachers'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    teacher_id = db.Column(db.String(20), unique=True, nullable=False, index=True)
+    name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False, index=True)
+    phone = db.Column(db.String(20))
+    password_hash = db.Column(db.String(256), nullable=False)
+    qualification = db.Column(db.String(200))
+    experience = db.Column(db.Integer, default=0)  # years
+    subject = db.Column(db.String(100))
+    specialization = db.Column(db.String(200))
+    role = db.Column(db.String(20), default='teacher')
+    is_active = db.Column(db.Boolean, default=True)
+    joining_date = db.Column(db.Date, default=date.today)
+    salary = db.Column(db.Float, default=0.0)
+    address = db.Column(db.Text)
+    photo_url = db.Column(db.String(500))
+    last_login = db.Column(db.DateTime)
+    
+    # Relationships
+    doubts_resolved = db.relationship('Doubt', backref='resolver', lazy='dynamic',
+                                     foreign_keys='Doubt.resolved_by',
+                                     primaryjoin='and_(Doubt.resolved_by == Teacher.id)')
+    notifications = db.relationship('Notification', backref='teacher', lazy='dynamic',
+                                   foreign_keys='Notification.user_id',
+                                   primaryjoin='and_(Notification.user_id == Teacher.id, Notification.user_type == "teacher")')
+    
+    def get_id(self):
+        return str(self.id)
+    
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'teacher_id': self.teacher_id,
+            'name': self.name,
+            'email': self.email,
+            'phone': self.phone,
+            'qualification': self.qualification,
+            'experience': self.experience,
+            'subject': self.subject,
+            'role': self.role
+        }
 
-# ===================== USER MIXIN =====================
 
-class User(UserMixin):
-    """Base user mixin for authentication"""
-    pass
+class Parent(UserMixin, db.Model, TimestampMixin):
+    __tablename__ = 'parents'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False, index=True)
+    phone = db.Column(db.String(20))
+    password_hash = db.Column(db.String(256), nullable=False)
+    linked_students = db.Column(db.JSON, default=list)  # List of student IDs
+    role = db.Column(db.String(20), default='parent')
+    is_active = db.Column(db.Boolean, default=True)
+    occupation = db.Column(db.String(100))
+    address = db.Column(db.Text)
+    photo_url = db.Column(db.String(500))
+    last_login = db.Column(db.DateTime)
+    
+    # Relationships
+    students = db.relationship('Student', backref='parent', lazy='dynamic',
+                              foreign_keys='Student.parent_id')
+    notifications = db.relationship('Notification', backref='parent', lazy='dynamic',
+                                   foreign_keys='Notification.user_id',
+                                   primaryjoin='and_(Notification.user_id == Parent.id, Notification.user_type == "parent")')
+    
+    def get_id(self):
+        return str(self.id)
+    
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+    def link_student(self, student_id):
+        if self.linked_students is None:
+            self.linked_students = []
+        if student_id not in self.linked_students:
+            self.linked_students.append(student_id)
+    
+    def unlink_student(self, student_id):
+        if self.linked_students and student_id in self.linked_students:
+            self.linked_students.remove(student_id)
 
-# ===================== ADMIN =====================
 
-class Admin(db.Model, User):
+class Admin(UserMixin, db.Model, TimestampMixin):
     __tablename__ = 'admins'
     
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-    full_name = db.Column(db.String(120), nullable=False)
+    name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False, index=True)
     phone = db.Column(db.String(20))
-    profile_pic = db.Column(db.String(256))
-    is_super_admin = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    password_hash = db.Column(db.String(256), nullable=False)
+    role = db.Column(db.String(20), default='admin')
+    is_superadmin = db.Column(db.Boolean, default=False)
     last_login = db.Column(db.DateTime)
     
     def get_id(self):
-        return f'admin_{self.id}'
+        return str(self.id)
+    
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'phone': self.phone,
+            'role': self.role,
+            'is_superadmin': self.is_superadmin
+        }
 
-# ===================== CLASS =====================
 
-class Class(db.Model):
+# ===================== ACADEMIC MODELS =====================
+class Class(db.Model, TimestampMixin):
     __tablename__ = 'classes'
     
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)  # e.g., "Class 11 PCM"
+    name = db.Column(db.String(100), nullable=False)  # e.g., "Class 11", "Class 12"
     section = db.Column(db.String(10), default='A')
-    code = db.Column(db.String(20), unique=True)  # e.g., "11PCM-A"
-    stream = db.Column(db.String(20))  # science, commerce
-    academic_year = db.Column(db.String(20), default='2026-27')
-    fees = db.Column(db.Float, default=0.0)
+    academic_year = db.Column(db.String(20), default=lambda: f'{date.today().year}-{date.today().year + 1}')
+    description = db.Column(db.Text)
     room_number = db.Column(db.String(20))
     class_teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
     is_active = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    subjects = db.relationship('Subject', secondary=class_subjects, backref='classes')
-    students = db.relationship('Student', backref='class_info', lazy='dynamic')
+    # Relationships
+    enrollments = db.relationship('StudentClass', backref='class_', lazy='dynamic')
+    exams = db.relationship('Exam', backref='class_', lazy='dynamic')
+    timetables = db.relationship('Timetable', backref='class_', lazy='dynamic')
+    study_materials = db.relationship('StudyMaterial', backref='class_', lazy='dynamic',
+                                     foreign_keys='StudyMaterial.class_id')
+    class_teacher = db.relationship('Teacher', backref='class_teacher_of', lazy='joined',
+                                   foreign_keys='Class.class_teacher_id')
     
     def __repr__(self):
         return f'{self.name} - {self.section}'
+    
+    def to_dict(self):
+        return {'id': self.id, 'name': self.name, 'section': self.section, 'academic_year': self.academic_year}
 
-# ===================== SUBJECT =====================
 
-class Subject(db.Model):
+class Subject(db.Model, TimestampMixin):
     __tablename__ = 'subjects'
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     code = db.Column(db.String(20), unique=True)
     description = db.Column(db.Text)
-    is_lab = db.Column(db.Boolean, default=False)
-    max_marks = db.Column(db.Integer, default=100)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_lab = db.Column(db.Boolean, default=False)  # Whether it has practical component
+    max_marks_theory = db.Column(db.Integer, default=70)
+    max_marks_practical = db.Column(db.Integer, default=30)
+    is_active = db.Column(db.Boolean, default=True)
+    
+    # Relationships
+    marks = db.relationship('Marks', backref='subject', lazy='dynamic')
+    exams = db.relationship('Exam', backref='subject', lazy='dynamic')
+    study_materials = db.relationship('StudyMaterial', backref='subject', lazy='dynamic',
+                                     foreign_keys='StudyMaterial.subject_id')
+    doubts = db.relationship('Doubt', backref='subject', lazy='dynamic',
+                            foreign_keys='Doubt.subject_id')
     
     def __repr__(self):
         return self.name
+    
+    def to_dict(self):
+        return {'id': self.id, 'name': self.name, 'code': self.code}
 
-# ===================== STUDENT =====================
 
-class Student(db.Model, User):
-    __tablename__ = 'students'
+class StudentClass(db.Model, TimestampMixin):
+    """Junction table: Student <-> Class enrollment (supports multiple years)"""
+    __tablename__ = 'student_classes'
     
     id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.String(20), unique=True, nullable=False)  # e.g., FUS-2026-0001
-    admission_number = db.Column(db.String(30), unique=True)
-    first_name = db.Column(db.String(80), nullable=False)
-    last_name = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-    phone = db.Column(db.String(20))
-    parent_phone = db.Column(db.String(20))
-    date_of_birth = db.Column(db.Date)
-    gender = db.Column(db.String(10))
-    address = db.Column(db.Text)
-    
-    # Class info
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
+    academic_year = db.Column(db.String(20), default=lambda: f'{date.today().year}-{date.today().year + 1}')
     roll_number = db.Column(db.Integer)
-    section = db.Column(db.String(10))
-    
-    # Profile
-    profile_pic = db.Column(db.String(256))
-    
-    # Status
     is_active = db.Column(db.Boolean, default=True)
-    is_fee_locked = db.Column(db.Boolean, default=False)
-    fee_due_date = db.Column(db.Date)
-    fee_lock_date = db.Column(db.Date)
+    enrolled_date = db.Column(db.Date, default=date.today)
     
-    # Parent info
-    parent_id = db.Column(db.Integer, db.ForeignKey('parents.id'))
-    
-    # Timestamps
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    last_login = db.Column(db.DateTime)
-    current_device_id = db.Column(db.String(256))
-    current_session_token = db.Column(db.String(256))
-    
-    # Relationships
-    attendance_records = db.relationship('Attendance', backref='student', lazy='dynamic')
-    marks_records = db.relationship('Marks', backref='student', lazy='dynamic')
-    fee_records = db.relationship('FeePayment', backref='student', lazy='dynamic')
-    doubts = db.relationship('Doubt', backref='student', lazy='dynamic')
-    test_attempts = db.relationship('TestAttempt', backref='student', lazy='dynamic')
-    notifications = db.relationship('Notification', backref='student', lazy='dynamic')
-    device_sessions = db.relationship('DeviceSession', backref='student', lazy='dynamic')
-    
-    subjects = db.relationship('Subject', secondary=student_subjects, backref='students')
-    
-    def get_id(self):
-        return f'student_{self.id}'
-    
-    @property
-    def full_name(self):
-        return f'{self.first_name} {self.last_name or ""}'.strip()
-    
-    @property
-    def attendance_percentage(self):
-        total = self.attendance_records.count()
-        if total == 0:
-            return 0
-        present = self.attendance_records.filter_by(status='present').count()
-        return round((present / total) * 100, 1)
-    
-    @property
-    def is_fee_overdue(self):
-        if not self.fee_due_date:
-            return False
-        return date.today() > self.fee_due_date
-    
-    @property
-    def grace_days_remaining(self):
-        if not self.fee_due_date:
-            return 999
-        from config import Config
-        grace_end = self.fee_due_date + timedelta(days=Config.FEE_GRACE_PERIOD_DAYS)
-        remaining = (grace_end - date.today()).days
-        return max(0, remaining)
+    __table_args__ = (
+        db.UniqueConstraint('student_id', 'class_id', 'academic_year', name='uq_student_class_year'),
+    )
 
-# ===================== TEACHER =====================
 
-class Teacher(db.Model, User):
-    __tablename__ = 'teachers'
+# ===================== ATTENDANCE MODELS =====================
+class AttendanceSession(db.Model, TimestampMixin):
+    """Tracks attendance marking sessions (who marked what when)"""
+    __tablename__ = 'attendance_sessions'
     
     id = db.Column(db.Integer, primary_key=True)
-    teacher_id = db.Column(db.String(20), unique=True)  # e.g., FAC-2026-0001
-    first_name = db.Column(db.String(80), nullable=False)
-    last_name = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-    phone = db.Column(db.String(20))
-    qualification = db.Column(db.String(256))
-    specialization = db.Column(db.String(256))
-    experience_years = db.Column(db.Integer)
-    date_of_joining = db.Column(db.Date)
-    gender = db.Column(db.String(10))
-    address = db.Column(db.Text)
-    profile_pic = db.Column(db.String(256))
-    is_active = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    last_login = db.Column(db.DateTime)
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
+    teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'), nullable=False)
+    date = db.Column(db.Date, nullable=False, default=date.today)
+    period = db.Column(db.String(20), default='morning')  # morning, afternoon, evening
+    total_students = db.Column(db.Integer, default=0)
+    present_count = db.Column(db.Integer, default=0)
+    absent_count = db.Column(db.Integer, default=0)
+    late_count = db.Column(db.Integer, default=0)
+    status = db.Column(db.String(20), default='completed')  # in_progress, completed, cancelled
     
-    # Relationships
-    classes_teaching = db.relationship('Class', backref='class_teacher', lazy='dynamic')
-    subjects_teaching = db.relationship('Subject', secondary=teacher_subjects, backref='teachers')
-    attendance_marked = db.relationship('Attendance', backref='marked_by_teacher', lazy='dynamic')
+    teacher = db.relationship('Teacher', backref='attendance_sessions', lazy='joined',
+                             foreign_keys='AttendanceSession.teacher_id')
+    class_rel = db.relationship('Class', backref='attendance_sessions', lazy='joined',
+                               foreign_keys='AttendanceSession.class_id')
     
-    def get_id(self):
-        return f'teacher_{self.id}'
-    
-    @property
-    def full_name(self):
-        return f'{self.first_name} {self.last_name or ""}'.strip()
+    __table_args__ = (
+        db.UniqueConstraint('class_id', 'date', 'period', name='uq_attendance_session'),
+    )
 
-# ===================== PARENT =====================
 
-class Parent(db.Model, User):
-    __tablename__ = 'parents'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    parent_id = db.Column(db.String(20), unique=True)
-    first_name = db.Column(db.String(80), nullable=False)
-    last_name = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-    phone = db.Column(db.String(20))
-    alternate_phone = db.Column(db.String(20))
-    occupation = db.Column(db.String(100))
-    address = db.Column(db.Text)
-    profile_pic = db.Column(db.String(256))
-    is_active = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    last_login = db.Column(db.DateTime)
-    
-    # Relationships
-    children = db.relationship('Student', backref='parent_info', lazy='dynamic')
-    
-    def get_id(self):
-        return f'parent_{self.id}'
-    
-    @property
-    def full_name(self):
-        return f'{self.first_name} {self.last_name or ""}'.strip()
-
-# ===================== ATTENDANCE =====================
-
-class Attendance(db.Model):
+class Attendance(db.Model, TimestampMixin):
     __tablename__ = 'attendance'
     
     id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False, index=True)
     date = db.Column(db.Date, nullable=False, default=date.today)
-    status = db.Column(db.String(20), nullable=False)  # present, absent, late, holiday
+    status = db.Column(db.String(20), default='present')  # present, absent, late, holiday, not_marked
+    period = db.Column(db.String(20), default='morning')  # morning, afternoon, evening, full_day
+    session_id = db.Column(db.Integer, db.ForeignKey('attendance_sessions.id'))
+    remarks = db.Column(db.String(500))
     marked_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    remarks = db.Column(db.String(256))
-    period = db.Column(db.String(20))  # morning, afternoon, full_day
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    marker = db.relationship('Teacher', backref='marked_attendance', lazy='joined',
+                            foreign_keys='Attendance.marked_by')
     
     __table_args__ = (
-        db.UniqueConstraint('student_id', 'date', 'period', name='unique_attendance'),
+        db.UniqueConstraint('student_id', 'date', 'period', name='uq_student_attendance'),
     )
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'date': self.date.strftime('%Y-%m-%d') if self.date else '',
+            'status': self.status,
+            'period': self.period
+        }
 
-# ===================== MARKS =====================
 
-class Marks(db.Model):
+# ===================== MARKS & EXAMS =====================
+class Exam(db.Model, TimestampMixin):
+    __tablename__ = 'exams'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)  # e.g., "Unit Test 1 - March 2026"
+    exam_type = db.Column(db.String(50), default='unit_test')  # unit_test, half_yearly, final, monthly_test, pre_board, weekly_test
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
+    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'), nullable=False)
+    total_marks = db.Column(db.Integer, default=100)
+    passing_marks = db.Column(db.Integer, default=33)
+    date = db.Column(db.Date, default=date.today)
+    start_time = db.Column(db.Time)
+    end_time = db.Column(db.Time)
+    description = db.Column(db.Text)
+    is_published = db.Column(db.Boolean, default=False)
+    created_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    
+    # Relationships
+    marks_list = db.relationship('Marks', backref='exam', lazy='dynamic')
+    creator = db.relationship('Teacher', backref='created_exams', lazy='joined',
+                            foreign_keys='Exam.created_by')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'exam_type': self.exam_type,
+            'class_id': self.class_id,
+            'subject_id': self.subject_id,
+            'total_marks': self.total_marks,
+            'date': self.date.strftime('%Y-%m-%d') if self.date else ''
+        }
+
+
+class Marks(db.Model, TimestampMixin):
     __tablename__ = 'marks'
     
     id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False, index=True)
     subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'), nullable=False)
-    exam_type = db.Column(db.String(50), nullable=False)  # unit_test, half_yearly, final, monthly_test
-    exam_name = db.Column(db.String(100))
+    exam_id = db.Column(db.Integer, db.ForeignKey('exams.id'), nullable=False)
+    exam_type = db.Column(db.String(50), default='unit_test')
     marks_obtained = db.Column(db.Float, nullable=False)
-    max_marks = db.Column(db.Float, nullable=False, default=100)
+    max_marks = db.Column(db.Float, default=100.0)
+    percentage = db.Column(db.Float)
     grade = db.Column(db.String(5))
-    remarks = db.Column(db.String(256))
     exam_date = db.Column(db.Date, default=date.today)
+    remarks = db.Column(db.String(500))
     entered_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_verified = db.Column(db.Boolean, default=False)
+    verified_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    verified_at = db.Column(db.DateTime)
+    
+    # Relationships
+    enterer = db.relationship('Teacher', backref='entered_marks', lazy='joined',
+                             foreign_keys='Marks.entered_by')
+    verifier = db.relationship('Teacher', backref='verified_marks', lazy='joined',
+                              foreign_keys='Marks.verified_by')
     
     __table_args__ = (
-        db.UniqueConstraint('student_id', 'subject_id', 'exam_type', 'exam_name', name='unique_marks'),
+        db.UniqueConstraint('student_id', 'exam_id', 'subject_id', name='uq_student_exam_subject'),
     )
     
-    @property
-    def percentage(self):
-        if self.max_marks > 0:
-            return round((self.marks_obtained / self.max_marks) * 100, 1)
-        return 0
+    def calculate_grade(self):
+        """Calculate letter grade based on percentage."""
+        if self.percentage is None:
+            return None
+        if self.percentage >= 90: return 'A+'
+        if self.percentage >= 80: return 'A'
+        if self.percentage >= 70: return 'B+'
+        if self.percentage >= 60: return 'B'
+        if self.percentage >= 50: return 'C'
+        if self.percentage >= 40: return 'D'
+        return 'F'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'subject_id': self.subject_id,
+            'exam_id': self.exam_id,
+            'marks_obtained': self.marks_obtained,
+            'max_marks': self.max_marks,
+            'percentage': round(self.percentage, 1) if self.percentage else 0,
+            'grade': self.grade or self.calculate_grade()
+        }
 
-# ===================== FEE PAYMENT =====================
 
-class FeePayment(db.Model):
+class BulkMarksEntry(db.Model, TimestampMixin):
+    """Track bulk marks entry sessions"""
+    __tablename__ = 'bulk_marks_entries'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
+    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'), nullable=False)
+    exam_id = db.Column(db.Integer, db.ForeignKey('exams.id'), nullable=False)
+    entered_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    total_students = db.Column(db.Integer, default=0)
+    marks_entered = db.Column(db.Integer, default=0)
+    status = db.Column(db.String(20), default='in_progress')  # in_progress, completed
+    session_data = db.Column(db.JSON)  # Backup of the entered data
+
+
+# ===================== FEE & PAYMENT MODELS =====================
+class FeePayment(db.Model, TimestampMixin):
     __tablename__ = 'fee_payments'
     
     id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    receipt_number = db.Column(db.String(50), unique=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False, index=True)
     amount = db.Column(db.Float, nullable=False)
-    paid_amount = db.Column(db.Float, nullable=False)
-    discount = db.Column(db.Float, default=0.0)
-    fine = db.Column(db.Float, default=0.0)
     payment_date = db.Column(db.DateTime, default=datetime.utcnow)
-    due_date = db.Column(db.Date)
-    payment_mode = db.Column(db.String(30))  # cash, online, cheque, razorpay
-    payment_status = db.Column(db.String(20), default='paid')  # paid, pending, failed
-    transaction_id = db.Column(db.String(100))
+    payment_mode = db.Column(db.String(50), default='cash')  # cash, online, bank_transfer, cheque, razorpay
+    status = db.Column(db.String(20), default='pending')  # pending, paid, failed, refunded
+    receipt_no = db.Column(db.String(50), unique=True)
     razorpay_order_id = db.Column(db.String(100))
     razorpay_payment_id = db.Column(db.String(100))
-    month = db.Column(db.String(20))
-    year = db.Column(db.String(10))
-    remarks = db.Column(db.String(256))
+    razorpay_signature = db.Column(db.String(200))
+    transaction_id = db.Column(db.String(100))
+    paid_for_month = db.Column(db.String(20))  # e.g., "2026-06"
+    description = db.Column(db.String(500))
+    received_by = db.Column(db.Integer, db.ForeignKey('admins.id'))
+    discount = db.Column(db.Float, default=0.0)
+    late_fee = db.Column(db.Float, default=0.0)
     
-    def __repr__(self):
-        return f'FeePayment {self.receipt_number} - ₹{self.paid_amount}'
-
-# ===================== ONLINE TEST =====================
-
-class Test(db.Model):
-    __tablename__ = 'tests'
+    receiver = db.relationship('Admin', backref='collected_payments', lazy='joined',
+                              foreign_keys='FeePayment.received_by')
     
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    description = db.Column(db.Text)
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
-    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
-    teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    
-    # Test configuration
-    duration_minutes = db.Column(db.Integer, nullable=False)
-    total_marks = db.Column(db.Integer, nullable=False)
-    passing_marks = db.Column(db.Integer, default=0)
-    negative_marking = db.Column(db.Boolean, default=False)
-    negative_mark_value = db.Column(db.Float, default=0.0)
-    shuffle_questions = db.Column(db.Boolean, default=True)
-    fullscreen_mode = db.Column(db.Boolean, default=True)
-    auto_submit = db.Column(db.Boolean, default=True)
-    show_result_immediately = db.Column(db.Boolean, default=True)
-    
-    # Schedule
-    scheduled_date = db.Column(db.DateTime)
-    start_time = db.Column(db.DateTime)
-    end_time = db.Column(db.DateTime)
-    is_active = db.Column(db.Boolean, default=True)
-    
-    # Timestamps
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
-    # Relationships
-    questions = db.relationship('Question', backref='test', lazy='dynamic', cascade='all, delete-orphan')
-    attempts = db.relationship('TestAttempt', backref='test', lazy='dynamic')
-
-class Question(db.Model):
-    __tablename__ = 'questions'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable=False)
-    question_type = db.Column(db.String(20), nullable=False)  # mcq, subjective
-    question_text = db.Column(db.Text, nullable=False)
-    options = db.Column(db.JSON)  # For MCQ: {"A": "text", "B": "text", "C": "text", "D": "text"}
-    correct_answer = db.Column(db.Text)  # For MCQ: "A"/"B"/"C"/"D", For subjective: answer text
-    marks = db.Column(db.Float, nullable=False, default=1.0)
-    difficulty = db.Column(db.String(20), default='medium')
-    order_index = db.Column(db.Integer, default=0)
-    
-    def to_dict(self, show_answer=False):
-        data = {
+    def to_dict(self):
+        return {
             'id': self.id,
-            'question_type': self.question_type,
-            'question_text': self.question_text,
-            'marks': self.marks,
-            'order_index': self.order_index,
+            'student_id': self.student_id,
+            'amount': self.amount,
+            'payment_date': self.payment_date.strftime('%Y-%m-%d %H:%M') if self.payment_date else '',
+            'payment_mode': self.payment_mode,
+            'status': self.status,
+            'receipt_no': self.receipt_no
         }
-        if self.question_type == 'mcq':
-            data['options'] = self.options
-        if show_answer:
-            data['correct_answer'] = self.correct_answer
-        return data
 
-class TestAttempt(db.Model):
-    __tablename__ = 'test_attempts'
+
+class FeeReminder(db.Model, TimestampMixin):
+    __tablename__ = 'fee_reminders'
     
     id = db.Column(db.Integer, primary_key=True)
-    test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable=False)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False, index=True)
+    amount = db.Column(db.Float, nullable=False)
+    due_date = db.Column(db.Date, nullable=False)
+    grace_days = db.Column(db.Integer, default=7)
+    grace_end_date = db.Column(db.Date)
+    status = db.Column(db.String(20), default='pending')  # pending, paid, overridden, expired
+    reminder_count = db.Column(db.Integer, default=0)
+    last_reminder_sent = db.Column(db.DateTime)
+    paid_at = db.Column(db.DateTime)
+    paid_amount = db.Column(db.Float)
+    notes = db.Column(db.Text)
+    created_by = db.Column(db.Integer, db.ForeignKey('admins.id'))
     
-    # Status
-    started_at = db.Column(db.DateTime, default=datetime.utcnow)
-    submitted_at = db.Column(db.DateTime)
-    is_submitted = db.Column(db.Boolean, default=False)
+    creator = db.relationship('Admin', backref='created_reminders', lazy='joined',
+                             foreign_keys='FeeReminder.created_by')
     
-    # Auto-save
-    answers = db.Column(db.JSON)  # {"question_id": "selected_answer"}
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.due_date and not self.grace_end_date:
+            self.grace_end_date = self.due_date + timedelta(days=self.grace_days)
     
-    # Evaluation
-    total_marks_obtained = db.Column(db.Float)
-    correct_count = db.Column(db.Integer, default=0)
-    incorrect_count = db.Column(db.Integer, default=0)
-    unanswered_count = db.Column(db.Integer, default=0)
-    negative_marks = db.Column(db.Float, default=0.0)
-    percentage = db.Column(db.Float)
-    rank = db.Column(db.Integer)
+    def is_overdue(self):
+        return date.today() > self.due_date
     
-    # Anti-cheat
-    fullscreen_exits = db.Column(db.Integer, default=0)
-    ip_address = db.Column(db.String(50))
-    user_agent = db.Column(db.String(256))
+    def is_grace_expired(self):
+        return self.grace_end_date and date.today() > self.grace_end_date
     
-    __table_args__ = (
-        db.UniqueConstraint('test_id', 'student_id', name='unique_test_attempt'),
-    )
+    def days_remaining(self):
+        if not self.due_date:
+            return 0
+        return (self.due_date - date.today()).days
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'amount': self.amount,
+            'due_date': self.due_date.strftime('%Y-%m-%d') if self.due_date else '',
+            'grace_end_date': self.grace_end_date.strftime('%Y-%m-%d') if self.grace_end_date else '',
+            'status': self.status,
+            'days_remaining': self.days_remaining()
+        }
 
-# ===================== DOUBT SECTION =====================
 
-class Doubt(db.Model):
+# ===================== DOUBT / STUDY MATERIAL =====================
+class Doubt(db.Model, TimestampMixin):
     __tablename__ = 'doubts'
     
     id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False, index=True)
     subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
     title = db.Column(db.String(200))
-    question_text = db.Column(db.Text, nullable=False)
-    image_path = db.Column(db.String(256))
-    
-    # Status
+    question = db.Column(db.Text, nullable=False)
+    question_image_url = db.Column(db.String(500))
     is_resolved = db.Column(db.Boolean, default=False)
+    answer = db.Column(db.Text)
+    answer_image_url = db.Column(db.String(500))
     resolved_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    answer_text = db.Column(db.Text)
-    answer_image = db.Column(db.String(256))
     resolved_at = db.Column(db.DateTime)
+    priority = db.Column(db.String(20), default='normal')  # low, normal, high, urgent
     
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    def __repr__(self):
+        return f'Doubt #{self.id} by Student #{self.student_id}'
     
-    # Relationships
-    teacher = db.relationship('Teacher', backref='answered_doubts')
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'subject_id': self.subject_id,
+            'question': self.question[:100] + ('...' if len(self.question) > 100 else ''),
+            'is_resolved': self.is_resolved,
+            'answer': self.answer[:100] + ('...' if self.answer and len(self.answer) > 100 else '') if self.answer else None,
+            'created': self.created_at.strftime('%Y-%m-%d %H:%M') if self.created_at else '',
+            'priority': self.priority
+        }
 
-# ===================== STUDY MATERIAL =====================
 
-class StudyMaterial(db.Model):
+class StudyMaterial(db.Model, TimestampMixin):
     __tablename__ = 'study_materials'
     
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text)
-    file_type = db.Column(db.String(20))  # pdf, ppt, doc, image, video
-    file_path = db.Column(db.String(256), nullable=False)
-    file_size = db.Column(db.Integer)
-    
-    # Ownership
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
     subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
-    teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    
-    # Type
-    material_type = db.Column(db.String(30))  # notes, assignment, lecture, reference
-    is_downloadable = db.Column(db.Boolean, default=False)
-    
-    # Watermark
-    watermark_text = db.Column(db.String(256))
-    
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
+    file_type = db.Column(db.String(20))  # pdf, doc, video, link, image
+    file_url = db.Column(db.String(500))
+    file_size = db.Column(db.Integer)  # in bytes
+    thumbnail_url = db.Column(db.String(500))
+    is_public = db.Column(db.Boolean, default=False)
+    uploaded_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
+    tags = db.Column(db.JSON, default=list)
     download_count = db.Column(db.Integer, default=0)
+    
+    uploader = db.relationship('Teacher', backref='uploaded_materials', lazy='joined',
+                              foreign_keys='StudyMaterial.uploaded_by')
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'subject_id': self.subject_id,
+            'class_id': self.class_id,
+            'file_type': self.file_type,
+            'file_url': self.file_url,
+            'created': self.created_at.strftime('%Y-%m-%d') if self.created_at else ''
+        }
 
-# ===================== LECTURE VIDEO =====================
-
-class LectureVideo(db.Model):
-    __tablename__ = 'lecture_videos'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    description = db.Column(db.Text)
-    video_path = db.Column(db.String(256), nullable=False)
-    thumbnail_path = db.Column(db.String(256))
-    duration_seconds = db.Column(db.Integer)
-    
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
-    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
-    teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    
-    is_published = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    view_count = db.Column(db.Integer, default=0)
-
-class VideoProgress(db.Model):
-    __tablename__ = 'video_progress'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    video_id = db.Column(db.Integer, db.ForeignKey('lecture_videos.id'), nullable=False)
-    progress_seconds = db.Column(db.Integer, default=0)
-    completed = db.Column(db.Boolean, default=False)
-    last_watched = db.Column(db.DateTime, default=datetime.utcnow)
-    
-    __table_args__ = (
-        db.UniqueConstraint('student_id', 'video_id', name='unique_video_progress'),
-    )
-
-# ===================== NOTICE =====================
-
-class Notice(db.Model):
-    __tablename__ = 'notices'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    
-    # Targeting
-    target_type = db.Column(db.String(20))  # all, class, section
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
-    
-    created_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    created_by_admin = db.Column(db.Integer, db.ForeignKey('admins.id'))
-    
-    is_urgent = db.Column(db.Boolean, default=False)
-    attachment_path = db.Column(db.String(256))
-    
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    expires_at = db.Column(db.DateTime)
-
-# ===================== HOMEWORK =====================
-
-class Homework(db.Model):
-    __tablename__ = 'homework'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    description = db.Column(db.Text)
-    
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'))
-    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
-    teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    
-    attachment_path = db.Column(db.String(256))
-    deadline = db.Column(db.DateTime)
-    max_marks = db.Column(db.Integer)
-    
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-class HomeworkSubmission(db.Model):
-    __tablename__ = 'homework_submissions'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    homework_id = db.Column(db.Integer, db.ForeignKey('homework.id'), nullable=False)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    submission_text = db.Column(db.Text)
-    attachment_path = db.Column(db.String(256))
-    submitted_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
-    # Evaluation
-    is_evaluated = db.Column(db.Boolean, default=False)
-    marks_obtained = db.Column(db.Float)
-    feedback = db.Column(db.Text)
-    evaluated_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    
-    __table_args__ = (
-        db.UniqueConstraint('homework_id', 'student_id', name='unique_homework_submission'),
-    )
-
-# ===================== NOTIFICATION =====================
-
-class Notification(db.Model):
-    __tablename__ = 'notifications'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    title = db.Column(db.String(200), nullable=False)
-    message = db.Column(db.Text, nullable=False)
-    notification_type = db.Column(db.String(30))  # attendance, fee, marks, notice, homework, test, doubt
-    is_read = db.Column(db.Boolean, default=False)
-    reference_id = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-# ===================== DEVICE SESSION =====================
-
-class DeviceSession(db.Model):
-    __tablename__ = 'device_sessions'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    device_id = db.Column(db.String(256), nullable=False)
-    device_name = db.Column(db.String(256))
-    device_type = db.Column(db.String(50))  # mobile, desktop, tablet
-    ip_address = db.Column(db.String(50))
-    user_agent = db.Column(db.String(512))
-    session_token = db.Column(db.String(256), unique=True)
-    is_active = db.Column(db.Boolean, default=True)
-    login_time = db.Column(db.DateTime, default=datetime.utcnow)
-    last_activity = db.Column(db.DateTime, default=datetime.utcnow)
-    logout_time = db.Column(db.DateTime)
-
-# ===================== AUDIT LOG =====================
-
-class AuditLog(db.Model):
-    __tablename__ = 'audit_logs'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    user_type = db.Column(db.String(20))  # admin, teacher, student, parent
-    user_id = db.Column(db.Integer)
-    action = db.Column(db.String(100), nullable=False)
-    details = db.Column(db.Text)
-    ip_address = db.Column(db.String(50))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 # ===================== TIMETABLE =====================
-
-class Timetable(db.Model):
-    __tablename__ = 'timetable'
+class Timetable(db.Model, TimestampMixin):
+    __tablename__ = 'timetables'
     
     id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
@@ -606,76 +590,167 @@ class Timetable(db.Model):
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
     room_number = db.Column(db.String(20))
+    is_active = db.Column(db.Boolean, default=True)
+    academic_year = db.Column(db.String(20), default=lambda: f'{date.today().year}-{date.today().year + 1}')
+    
+    teacher = db.relationship('Teacher', backref='timetable_entries', lazy='joined',
+                             foreign_keys='Timetable.teacher_id')
     
     __table_args__ = (
-        db.UniqueConstraint('class_id', 'day_of_week', 'start_time', name='unique_timetable_slot'),
+        db.UniqueConstraint('class_id', 'day_of_week', 'start_time', 'academic_year', name='uq_timetable_slot'),
     )
 
-# ===================== BULK MARKS ENTRY MODEL =====================
 
-class BulkMarksEntry(db.Model):
-    """Tracks bulk marks entry sessions"""
-    __tablename__ = 'bulk_marks_entries'
+# ===================== TEST / QUIZ =====================
+class TestScore(db.Model, TimestampMixin):
+    __tablename__ = 'test_scores'
     
     id = db.Column(db.Integer, primary_key=True)
-    class_id = db.Column(db.Integer, db.ForeignKey('classes.id'), nullable=False)
-    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'), nullable=False)
-    exam_type = db.Column(db.String(50), nullable=False)
-    exam_name = db.Column(db.String(100))
-    exam_date = db.Column(db.Date, default=date.today)
-    entered_by = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-    total_students = db.Column(db.Integer)
-    entries_count = db.Column(db.Integer, default=0)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    is_completed = db.Column(db.Boolean, default=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False, index=True)
+    test_name = db.Column(db.String(200), nullable=False)
+    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
+    score = db.Column(db.Float, nullable=False)
+    max_score = db.Column(db.Float, default=100.0)
+    percentage = db.Column(db.Float)
+    time_taken = db.Column(db.Integer)  # seconds
+    attempted_on = db.Column(db.DateTime, default=datetime.utcnow)
+    answers_json = db.Column(db.JSON)  # Store student's answers
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'student_id': self.student_id,
+            'test_name': self.test_name,
+            'score': self.score,
+            'max_score': self.max_score,
+            'percentage': round(self.percentage, 1) if self.percentage else 0,
+            'attempted_on': self.attempted_on.strftime('%Y-%m-%d %H:%M') if self.attempted_on else ''
+        }
+
 
 # ===================== WHATSAPP LOG =====================
-
-class WhatsAppLog(db.Model):
+class WhatsAppLog(db.Model, TimestampMixin):
     __tablename__ = 'whatsapp_logs'
     
     id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
-    parent_phone = db.Column(db.String(20))
-    message_type = db.Column(db.String(50))  # fee_reminder, attendance, marks, notice
-    message_body = db.Column(db.Text)
-    status = db.Column(db.String(20))  # sent, failed, pending
+    phone_number = db.Column(db.String(20), nullable=False, index=True)
+    message = db.Column(db.Text, nullable=False)
+    status = db.Column(db.String(20), default='sent')  # sent, failed, delivered, read
     twilio_sid = db.Column(db.String(100))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    notes = db.Column(db.Text)
+    sent_at = db.Column(db.DateTime, default=datetime.utcnow)
+    delivered_at = db.Column(db.DateTime)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'phone': self.phone_number,
+            'message': self.message[:100],
+            'status': self.status,
+            'sent_at': self.sent_at.strftime('%Y-%m-%d %H:%M') if self.sent_at else ''
+        }
+
+
+# ===================== AUDIT LOG =====================
+class AuditLog(db.Model):
+    __tablename__ = 'audit_logs'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_role = db.Column(db.String(20), db.Index)  # admin, teacher, student, parent, or None
+    user_id = db.Column(db.String(50), db.Index)
+    action = db.Column(db.String(100), nullable=False, db.Index)
+    details = db.Column(db.Text)
+    ip_address = db.Column(db.String(45))
+    user_agent = db.Column(db.String(500))
+    resource_type = db.Column(db.String(50))  # e.g., 'student', 'marks', 'fee'
+    resource_id = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, db.Index)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_role': self.user_role,
+            'user_id': self.user_id,
+            'action': self.action,
+            'details': self.details,
+            'ip_address': self.ip_address,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else ''
+        }
+
+
+# ===================== NOTIFICATION =====================
+class Notification(db.Model, TimestampMixin):
+    __tablename__ = 'notifications'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False, index=True)
+    user_type = db.Column(db.String(20), nullable=False)  # student, teacher, parent, admin
+    title = db.Column(db.String(200), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    notification_type = db.Column(db.String(50), default='info')  # info, warning, success, error, fee, marks, attendance
+    is_read = db.Column(db.Boolean, default=False)
+    read_at = db.Column(db.DateTime)
+    link = db.Column(db.String(500))  # Deep link to relevant page
+    image_url = db.Column(db.String(500))
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'message': self.message,
+            'type': self.notification_type,
+            'is_read': self.is_read,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M') if self.created_at else ''
+        }
+
 
 # ===================== DATABASE INIT =====================
-
 def init_db():
-    """Create all tables"""
+    """Create all tables and seed initial data."""
     db.create_all()
     
     # Create default admin if not exists
-    from werkzeug.security import generate_password_hash
-    from config import Config
+    from flask import current_app
+    admin_email = os.environ.get('ADMIN_EMAIL', 'admin@fusioncoaching.in')
+    admin_password = os.environ.get('ADMIN_PASSWORD', 'Admin@Fusion2026')
     
-    admin = Admin.query.filter_by(email=Config.ADMIN_EMAIL).first()
+    admin = Admin.query.filter_by(email=admin_email).first()
     if not admin:
         admin = Admin(
-            username='admin',
-            email=Config.ADMIN_EMAIL,
-            password_hash=generate_password_hash(Config.ADMIN_PASSWORD),
-            full_name='Super Admin',
-            is_super_admin=True
+            name='Fusion Admin',
+            email=admin_email,
+            phone='+919999999999',
+            password_hash=generate_password_hash(admin_password),
+            role='admin',
+            is_superadmin=True
         )
         db.session.add(admin)
         db.session.commit()
+        print(f'✅ Default admin created: {admin_email} / {admin_password}')
     
-    # Create default subjects if none exist
+    # Create default subjects if empty
     if Subject.query.count() == 0:
         default_subjects = [
-            'Physics', 'Chemistry', 'Mathematics', 'Biology',
-            'English', 'Hindi', 'Computer Science',
-            'Accounts', 'Economics', 'Business Studies',
-            'Physical Education'
+            Subject(name='Physics', code='PHY', max_marks_theory=70, max_marks_practical=30),
+            Subject(name='Chemistry', code='CHEM', max_marks_theory=70, max_marks_practical=30),
+            Subject(name='Mathematics', code='MATH', max_marks_theory=80, max_marks_practical=20),
+            Subject(name='Biology', code='BIO', max_marks_theory=70, max_marks_practical=30),
+            Subject(name='English', code='ENG', max_marks_theory=80, max_marks_practical=20),
+            Subject(name='Hindi', code='HIN', max_marks_theory=80, max_marks_practical=20),
         ]
-        for s in default_subjects:
-            subj = Subject(name=s, code=s[:3].upper() + str(Subject.query.count() + 1))
-            db.session.add(subj)
+        db.session.add_all(default_subjects)
         db.session.commit()
+        print(f'✅ {len(default_subjects)} default subjects created')
     
-    print("✅ Database initialized successfully!")
+    # Create default classes if empty
+    if Class.query.count() == 0:
+        default_classes = [
+            Class(name='Class 11', section='A'),
+            Class(name='Class 11', section='B'),
+            Class(name='Class 12', section='A'),
+            Class(name='Class 12', section='B'),
+            Class(name='Dropper Batch', section='A'),
+        ]
+        db.session.add_all(default_classes)
+        db.session.commit()
+        print(f'✅ {len(default_classes)} default classes created')
