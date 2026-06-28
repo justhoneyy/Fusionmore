@@ -15,7 +15,7 @@ from sqlalchemy import func, extract, and_, or_, desc
 import bleach
 
 from config import Config
-from models import db, Student, Teacher, Parent, Admin, Class, Subject, Timetable, StudentClass
+from models import db, Student, Teacher, Parent, Admin, Class, Subject, Timetable
 from models import AttendanceSession, Attendance, Marks, FeePayment, FeeReminder, WhatsAppLog
 from models import Exam, TestScore, Doubt, StudyMaterial, BulkMarksEntry, AuditLog, Notification
 
